@@ -1,0 +1,20 @@
+<div class="d-flex align-items-center justify-content-center vh-100">
+  <div class="w-25 me-4">
+    <img
+      class="img-fluid"
+      src="assets/images/coffee-shop-amico.png"
+      alt="Placeholder image"
+    />
+  </div>
+  <div class="text-center">
+    <h1 class="display-1 fw-bold">404</h1>
+    <p class="fs-3">
+      <span class="text-danger">{{ "not_found.prefix" | translate }}</span>
+      {{ "not_found.title" | translate }}
+    </p>
+    <p class="lead">{{ "not_found.info" | translate }}</p>
+    <a routerLink="/" class="btn btn-danger">{{
+      "not_found.home_btn" | translate
+    }}</a>
+  </div>
+</div>

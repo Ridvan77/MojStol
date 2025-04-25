@@ -1,0 +1,12 @@
+<div *ngIf="tags.length == 0">
+  {{ "restaurant.tags.no_tags" | translate }}
+</div>
+
+<div *ngIf="tags.length != 0" class="d-flex flex-wrap">
+  <span
+    *ngFor="let tag of myTags"
+    class="badge text-bg-danger bg-opacity-75 fs-6 me-2 mb-2"
+  >
+    {{ tag.name }}
+  </span>
+</div>

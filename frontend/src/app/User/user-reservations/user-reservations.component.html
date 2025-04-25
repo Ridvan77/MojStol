@@ -1,0 +1,82 @@
+<div class="container mt-4">
+  <h2>My Reservations</h2>
+
+  <div *ngIf="loading" class="text-center">
+    <div class="spinner-border" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>
+  </div>
+
+  <div *ngIf="error" class="alert alert-danger">
+    {{ error }}
+  </div>
+
+  <div *ngIf="!loading && reservations.length === 0" class="alert alert-info">
+    You have no active reservations.
+  </div>
+
+  <div *ngIf="!loading && reservations.length > 0" class="row">
+    <div class="col-12">
+      <div class="table-responsive">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>Restaurant</th>
+              <th>Date</th>
+              <th>Time</th>
+              <th>Number of People</th>
+              <th>Status</th>
+              <th>Edit</th>
+              <th>Delete</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let reservation of reservations">
+              <td>{{ reservation.restaurant?.name }}</td>
+              <td>{{ formatDate(reservation.reservationDate) }}</td>
+              <td>{{ formatTime(reservation.reservationTime) }}</td>
+              <td>{{ reservation.numberOfPersons }}</td>
+              <td class="">
+                <span
+                  [ngClass]="{
+                    '': true,
+                    'text-success': reservation.statusID === 2,
+                    'text-warning': reservation.statusID === 1,
+                    'text-danger': reservation.statusID === 3
+                  }"
+                >
+                  <i
+                    class="fas"
+                    [ngClass]="{
+                      'fa-check': reservation.statusID === 2,
+                      'fa-clock': reservation.statusID === 1,
+                      'fa-times': reservation.statusID === 3
+                    }"
+                  ></i>
+                </span>
+              </td>
+              <td>
+                <button
+                  class="btn"
+                  routerLink="/reservations/edit/{{
+                    reservation.reservationID
+                  }}"
+                >
+                  <i class="fas fa-pencil-alt"></i>
+                </button>
+              </td>
+              <td>
+                <button
+                  class="btn"
+                  (click)="deleteReservation(reservation.reservationID)"
+                >
+                  <i class="fas fa-trash-alt"></i>
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

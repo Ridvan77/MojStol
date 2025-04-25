@@ -1,0 +1,29 @@
+<h2 class="text-center mb-4">Admin Dashboard</h2>
+
+
+<div class="container pb-4">
+    <div class="row">
+        <div class="col-6 my-2">
+            <div class="card admin-statistic-card d-flex flex-column aling-items-center justify-content-center p-4 text-center">
+                <h2 class="number text-danger fw-bolder" >{{ usersCount }}</h2>
+                <p class="fw-bold fs-4">Active Users Count</p>
+                <a class="text-decoration-none text-danger fs-6" routerLink="/admin/users">See all users -></a>
+            </div>
+        </div>
+        <div class="col-6 my-2">
+            <div class="card admin-statistic-card d-flex flex-column aling-items-center justify-content-center p-4 text-center">
+                <h2 class="number text-danger fw-bolder" >{{ ownersCount }}</h2>
+                <p class="fw-bold fs-4">Active Owners Count</p>
+                <a class="text-decoration-none text-danger fs-6" routerLink="/admin/owners">See all owners -></a>
+            </div>
+        </div>
+        <div class="col-6 my-2">
+            <div class="card admin-statistic-card d-flex flex-column aling-items-center justify-content-center p-4 text-center">
+                <h2 class="number text-danger fw-bolder" >{{ restaurantsCount }}</h2>
+                <p class="fw-bold fs-4">Active Restaurants Count</p>
+                <a class="text-decoration-none text-danger fs-6" routerLink="/admin/restaurants">See all restaurants -></a>
+            </div>
+        </div>
+    </div>
+</div>
+  

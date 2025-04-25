@@ -1,0 +1,12 @@
+<div *ngIf="paymentMethods.length == 0">
+  {{ "restaurant.payment_methods.no_methods" | translate }}
+</div>
+
+<div *ngIf="paymentMethods.length != 0" class="d-flex flex-wrap">
+  <span
+    *ngFor="let paymentMethod of myPaymentMethods"
+    class="badge text-bg-danger bg-opacity-75 fs-6 me-2 mb-2"
+  >
+    <i [ngClass]="icons[paymentMethod.name]"></i> {{ paymentMethod.name }}
+  </span>
+</div>

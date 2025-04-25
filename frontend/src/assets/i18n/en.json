@@ -1,0 +1,205 @@
+{
+  "choose_language": "Choose language",
+  "language": {
+    "english": "English",
+    "bosnian": "Bosnian"
+  },
+  "not_found": {
+    "prefix": "Opps!",
+    "title": "Page not found.",
+    "info": "The page you’re looking for doesn’t exist.",
+    "home_btn": "Go Home"
+  },
+  "restaurant_list": {
+    "title": "Choose the city you're in:",
+    "search_restaurants": "Search restaurants by:",
+    "tags": "Tags",
+    "payment_methods": "Payment methods",
+    "facilities": "Facilities",
+    "empty": "No restaurants found.",
+    "clear_filters_btn": "Clear filters"
+  },
+  "restaurant": {
+    "make_reservation_btn": "Make a reservation",
+    "leave_review_btn": "Leave a review",
+    "change_logo": "Change logo",
+    "edit_details": "Edit restaurant details",
+    "about_us": "About us",
+    "no_website": "No website",
+    "edit_modal": {
+      "title": "Edit restaurant details",
+      "name": "Name:",
+      "description": "Description:",
+      "phone": "Phone number:",
+      "email": "Email:",
+      "street": "Street:",
+      "website": "Website: example (www.something.com):",
+      "validation": {
+        "name": "Please enter the restaurant name.",
+        "description": "Please enter a restaurant description less than 500 characters.",
+        "phone": "Please enter the restaurant phone number in a valid format.",
+        "email": "Please enter the restaurant email in a valid format.",
+        "street": "Please enter the restaurant street.",
+        "website": "Please enter a valid website format."
+      }
+    },
+    "modal": {
+      "save": "Save",
+      "remove": "Remove",
+      "edit": "Edit",
+      "delete": "Delete",
+      "close": "Close"
+    },
+    "logo": {
+      "modal": {
+        "title": "Change restaurant logo",
+        "choose_image_btn": "Choose image"
+      }
+    },
+    "menu": {
+      "title": "Menu",
+      "food": {
+        "title": "Food",
+        "add_food_category_btn": "Add food category"
+      },
+      "drink": {
+        "title": "Drink",
+        "add_drink_category_btn": "Add drink category"
+      }
+    },
+    "menu_category": {
+      "modal": {
+        "title": {
+          "add": "Add ",
+          "update": "Update ",
+          "food": "food ",
+          "drink": "drink ",
+          "menu_category": "menu category"
+        },
+        "category_name": "Name:",
+        "validation": {
+          "category_name": "Please enter a category name shorter than 50 characters."
+        }
+      },
+      "delete_modal": {
+        "title": "Delete menu category",
+        "confirm_msg": "Are you sure you want to delete"
+      }
+    },
+    "menu_item": {
+      "modal": {
+        "title": {
+          "add": "Add menu item",
+          "update": "Update menu item"
+        },
+        "menu_item_name": "Name:",
+        "description": "Description:",
+        "price": "Price in KM:",
+        "validation": {
+          "name": "Please enter an item name shorter than 50 characters.",
+          "description": "The item description must not be longer than 255 characters.",
+          "price": "Price must be greater than 0. Please enter a valid price."
+        }
+      },
+      "delete_modal": {
+        "title": "Delete menu item",
+        "confirm_msg": "Are you sure you want to delete"
+      },
+      "add_menu_item_btn": "Add item"
+    },
+    "tables": {
+      "title": "Tables",
+      "add_table_btn": "Add table",
+      "chairs_number": "Number of chairs",
+      "modal": {
+        "title": {
+          "add": "Add table or multiple tables",
+          "update": "Update table"
+        },
+        "table_id": "Table serial number:",
+        "tables_number": "Number of tables:",
+        "chairs_number": "Number of chairs:",
+        "in_function": "In function",
+        "remove_table_btn": "Remove table"
+      },
+      "delete_modal": {
+        "title": "Delete table",
+        "confirm_msg": "Are you sure you want to delete table serial number"
+      }
+    },
+    "images": {
+      "title": "Restaurant images",
+      "change_images_btn": "Change images",
+      "no_images": "The restaurant has no images.",
+      "modal": {
+        "title": "Change restaurant images",
+        "choose_images_btn": "Choose images"
+      }
+    },
+    "map": {
+      "title": "Location",
+      "no_location": "The restaurant does not have a set location.",
+      "modal": {
+        "title": "Choose location on the map",
+        "latitude": "Latitude:",
+        "latitude_info": "(-90 to 90)",
+        "longitude": "Longitude:",
+        "longitude_info": "(-180 to 180)",
+        "apply": "Apply",
+        "validation": {
+          "latitude": "Please enter a valid value for latitude.",
+          "longitude": "Please enter a valid value for longitude."
+        },
+        "remove_location_btn": "Remove location"
+      },
+      "delete_modal": {
+        "title": "Delete restaurant location on the map",
+        "confirm_msg": "Are you sure you want to delete"
+      }
+    },
+    "working_hours": {
+      "title": "Working hours",
+      "closed": "Closed",
+      "no_working_hours": "The restaurant has no set working hours.",
+      "day": {
+        "monday": "Monday",
+        "tuesday": "Tuesday",
+        "wednesday": "Wednesday",
+        "thursday": "Thursday",
+        "friday": "Friday",
+        "saturday": "Saturday",
+        "sunday": "Sunday"
+      },
+      "modal": {
+        "title": {
+          "add": "Add restaurant working hours",
+          "update": "Update restaurant working hours",
+          "info": "*The start of working hours must be earlier than the end - except 00:00 - 00:00"
+        },
+        "day": "Day",
+        "start_time": "Start time",
+        "end_time": "End time",
+        "closed": "Closed",
+        "remove_working_hours_btn": "Remove working hours"
+      },
+      "delete_modal": {
+        "title": "Delete working hours",
+        "confirm_msg": "Are you sure you want to delete"
+      }
+    },
+    "tags": {
+      "title": "Tags",
+      "no_tags": "The restaurant has no tags.",
+      "modal": {
+        "title": "Choose tags for the restaurant"
+      }
+    },
+    "payment_methods": {
+      "title": "Payment methods",
+      "no_methods": "The restaurant has no payment methods.",
+      "modal": {
+        "title": "Choose payment methods for the restaurant"
+      }
+    }
+  }
+}

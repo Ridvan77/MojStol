@@ -1,0 +1,171 @@
+<div class="container mt-4">
+  <!-- Filteri -->
+  <div class="card mb-4">
+    <div class="card-header">
+      <h5>Search by filters</h5>
+    </div>
+    <div class="card-body">
+      <form (ngSubmit)="applyFilters()" class="row g-3">
+        <div class="col-md-2">
+          <label class="form-label">Reservation ID</label>
+          <input
+            type="text"
+            class="form-control"
+            [(ngModel)]="filters.id"
+            name="id"
+          />
+        </div>
+        <div class="col-md-2">
+          <label class="form-label">Reservation Name</label>
+          <input
+            type="text"
+            class="form-control"
+            [(ngModel)]="filters.nameSurname"
+            name="nameSurname"
+          />
+        </div>
+        <div class="col-md-2">
+          <label class="form-label">Restaurant</label>
+          <select
+            class="form-select"
+            [(ngModel)]="filters.restaurantId"
+            name="restaurantId"
+          >
+            <option [ngValue]="null">Svi restorani</option>
+            <option
+              *ngFor="let restaurant of userRestaurants"
+              [value]="restaurant.id"
+            >
+              {{ restaurant.name }}
+            </option>
+          </select>
+        </div>
+        <div class="col-md-2">
+          <label class="form-label">Date From</label>
+          <input
+            type="date"
+            class="form-control"
+            [(ngModel)]="filters.dateFrom"
+            name="dateFrom"
+          />
+        </div>
+        <div class="col-md-2">
+          <label class="form-label">Date To</label>
+          <input
+            type="date"
+            class="form-control"
+            [(ngModel)]="filters.dateTo"
+            name="dateTo"
+          />
+        </div>
+        <div class="col-md-2 d-flex justify-content-end align-items-end">
+          <button type="submit" class="btn btn-danger">Search</button>
+          <button
+            type="button"
+            class="btn btn-light ms-2"
+            (click)="resetFilters()"
+            title="Resetuj filtere"
+          >
+            <i class="fas fa-undo"></i>
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Lista rezervacija -->
+  <div class="card">
+    <div class="card-header bg-white border-bottom py-3">
+      <div class="d-flex justify-content-between align-items-center">
+        <div class="d-flex align-items-center">
+          <i class="fas fa-calendar-check text-danger me-2"></i>
+          <h5 class="mb-0">Reservations list</h5>
+        </div>
+        <div>
+          <span class="">
+            {{ reservations.length }}
+            {{ reservations.length === 1 ? "reservation" : "reservations" }}
+          </span>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="table-responsive">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Date</th>
+              <th>Time</th>
+              <th>Persons</th>
+              <th>Status</th>
+              <th>Restaurant</th>
+              <th>Table</th>
+              <th>Scanned</th>
+              <th>Edit</th>
+              <th>Delete</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let reservation of reservations">
+              <td>{{ reservation.reservationID }}</td>
+              <td>{{ reservation.name }}</td>
+              <td>{{ reservation.email }}</td>
+              <td>{{ reservation.reservationDate | date : "dd.MM.yyyy" }}</td>
+              <td>{{ reservation.reservationTime }}</td>
+              <td>{{ reservation.numberOfPersons }}</td>
+              <td>
+                <span [class]="getStatusClass(reservation.statusID)">
+                  {{ getStatusText(reservation.statusID) }}
+                </span>
+              </td>
+              <td>{{ reservation.restaurant?.name }}</td>
+              <td>{{ reservation.table?.tableNumber || "-" }}</td>
+              <td>
+                <i
+                  [class]="
+                    reservation.isScanned
+                      ? 'fas fa-check text-success'
+                      : 'fas fa-times text-danger'
+                  "
+                ></i>
+              </td>
+              <td>
+                <button
+                  class="btn"
+                  routerLink="/reservations/edit/{{
+                    reservation.reservationID
+                  }}"
+                >
+                  <i class="fas fa-pencil-alt"></i>
+                </button>
+              </td>
+              <td>
+                <button
+                  class="btn"
+                  (click)="deleteReservation(reservation.reservationID)"
+                >
+                  <i class="fas fa-trash-alt"></i>
+                </button>
+              </td>
+            </tr>
+            <tr *ngIf="reservations.length === 0">
+              <td colspan="10">
+                <div class="text-center p-5 m-5">
+                  <i class="fas fa-calendar-times text-danger fa-3x mb-3"></i>
+                  <h5 class="text-danger mb-2">No reservations found</h5>
+                  <p class="text-muted">
+                    Currently there are no reservations that match the given
+                    filters
+                  </p>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

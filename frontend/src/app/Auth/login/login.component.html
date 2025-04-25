@@ -1,0 +1,75 @@
+<div class="container mx-auto py-5">
+  <div class="row shadow rounded">
+    <div class="col-12 col-lg-7 bg-light py-5 px-2 px-lg-5 rounded-start-2">
+      <a routerLink="/" class="text-decoration-none text-black opacity-75"><i class="bi bi-arrow-left"></i> Back</a>
+      <p class="fs-2 mt-3 text-danger">Welcome to MojStol!</p>
+      <p class="fs-6 opacity-75">Application through which you can quickly and easily reserve your table in your favorite restaurant!</p>
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="row mt-5">
+        <div class="col-12 mb-3">
+          <label class="form-label">Email address</label>
+          <input 
+            formControlName="email" 
+            type="email" 
+            class="form-control"
+            [ngClass]="{ 'is-invalid': submitted && f['email'].errors }">
+          <div *ngIf="submitted && f['email'].errors" class="invalid-feedback">
+            {{ getErrorMessage('email') }}
+          </div>
+        </div>
+        <div class="col-12 mb-3">
+          <label class="form-label">Password</label>
+          <div class="input-group">
+            <input 
+              formControlName="password" 
+              [type]="showPassword ? 'text' : 'password'" 
+              class="form-control"
+              [ngClass]="{ 'is-invalid': submitted && f['password'].errors }">
+            <button 
+              class="btn btn-outline-secondary" 
+              type="button" 
+              (click)="togglePasswordVisibility()">
+              <i class="bi" [ngClass]="showPassword ? 'bi-eye-slash' : 'bi-eye'"></i>
+            </button>
+          </div>
+        </div>
+        <div class="col-12 mb-3">
+          <button 
+            type="submit" 
+            class="btn btn-danger w-100" 
+            [disabled]="loginForm.invalid">
+            Login
+          </button>
+          <div *ngIf="loginForm.invalid" class="text-danger mt-2 small">
+            <div *ngIf="f['email'].errors?.['required']">
+              * Email is required
+            </div>
+            <div *ngIf="f['email'].errors?.['email']">
+              * Please enter a valid email
+            </div>
+            <div *ngIf="f['password'].errors?.['required']">
+              * Password is required
+            </div>
+            <div *ngIf="f['password'].errors?.['minlength']">
+              * Password must be at least 6 characters long (currently {{ f['password'].value?.length || 0 }} characters)
+            </div>
+          </div>
+        </div>
+      </form>
+      <p class="text-end"><a class="fs-6 opacity-75 text-center text-dark" (click)="openForgotPasswordModal()">Forgot password?</a></p>  
+      <p class="fs-6 opacity-75 text-center">Do not have profile? <a routerLink="/register" class="text-decoration-none text-dark fw-semibold">Register</a></p>
+    </div>
+    <div class="col-12 col-lg-5 border rounded-end-2" style="background-image: url('../../../assets/images/login.jpg'); background-size: contain; background-position: center;">
+    </div>
+  </div>
+</div>
+
+
+
+
+<app-two-factor-auth 
+  *ngIf="show2FAPopup" 
+  [userId]="userId"
+  [userEmail]="userEmail"
+  (verified)="on2FAVerified()">
+</app-two-factor-auth>
+<app-forgot-password *ngIf="showForgotPasswordModal" (close)="closeForgotPasswordModal()"></app-forgot-password>

@@ -1,0 +1,205 @@
+{
+  "choose_language": "izaberi jezik",
+  "language": {
+    "english": "Engleski",
+    "bosnian": "Bosanski"
+  },
+  "not_found": {
+    "prefix": "Upps!",
+    "title": "Stranica nije pronađena.",
+    "info": "Stranica koju si tražio ne postoji.",
+    "home_btn": "Početna stranica"
+  },
+  "restaurant_list": {
+    "title": "Izaberi grad u kojem se nalaziš:",
+    "search_restaurants": "Pretraži restorane po:",
+    "tags": "Tagovi",
+    "payment_methods": "Metode plaćanja",
+    "facilities": "Pogodnosti",
+    "empty": "Nema traženih restorana.",
+    "clear_filters_btn": "Očisti filtere"
+  },
+  "restaurant": {
+    "make_reservation_btn": "Napravi rezervaciju",
+    "leave_review_btn": "Ostavi recenziju",
+    "change_logo": "Promijeni logo",
+    "edit_details": "Uredi detalje restorana",
+    "about_us": "O nama",
+    "no_website": "Nema stranice",
+    "edit_modal": {
+      "title": "Uredi detalje restorana",
+      "name": "Naziv:",
+      "description": "Opis:",
+      "phone": "Broj telefona:",
+      "email": "Email:",
+      "street": "Ulica:",
+      "website": "Web stranica: primjer (www.nesto.ba):",
+      "validation": {
+        "name": "Molimo unesite naziv restorana.",
+        "description": "Molimo unesite opis restorana manji od 500 karaktera.",
+        "phone": "Molimo unesite broj restorana u validnom formatu.",
+        "email": "Molimo unesite email restorana u validnom formatu.",
+        "street": "Molimo unesite ulicu restorana.",
+        "website": "Unesite web stranicu u validnom formatu."
+      }
+    },
+    "modal": {
+      "save": "Sačuvaj",
+      "remove": "Ukloni",
+      "edit": "Uredi",
+      "delete": "Obriši",
+      "close": "Zatvori"
+    },
+    "logo": {
+      "modal": {
+        "title": "Promijeni logo restorana",
+        "choose_image_btn": "Izaberi sliku"
+      }
+    },
+    "menu": {
+      "title": "Meni",
+      "food": {
+        "title": "Hrana",
+        "add_food_category_btn": "Dodaj kategoriju hrane"
+      },
+      "drink": {
+        "title": "Piće",
+        "add_drink_category_btn": "Dodaj kategoriju pića"
+      }
+    },
+    "menu_category": {
+      "modal": {
+        "title": {
+          "add": "Dodaj ",
+          "update": "Ažuriraj ",
+          "food": "hrana ",
+          "drink": "piće ",
+          "menu_category": "meni kategoriju"
+        },
+        "category_name": "Naziv:",
+        "validation": {
+          "category_name": "Obavezno unesite naziv kategorije manji od 50 karaktera."
+        }
+      },
+      "delete_modal": {
+        "title": "Brisanje meni kategorije",
+        "confirm_msg": "Da li sigurno želite obrisati"
+      }
+    },
+    "menu_item": {
+      "modal": {
+        "title": {
+          "add": "Dodaj meni stavku",
+          "update": "Ažuriraj meni stavku"
+        },
+        "menu_item_name": "Naziv:",
+        "description": "Opis:",
+        "price": "Cijena u KM:",
+        "validation": {
+          "name": "Obavezno unesite naziv stavke manji od 50 karaktera.",
+          "description": "Opis stavke ne smije biti duži od 255 karaktera.",
+          "price": "Cijena mora biti veća od 0. Molimo unesite validnu cijenu."
+        }
+      },
+      "delete_modal": {
+        "title": "Brisanje meni stavke",
+        "confirm_msg": "Da li sigurno želite obrisati"
+      },
+      "add_menu_item_btn": "Dodaj stavku"
+    },
+    "tables": {
+      "title": "Stolovi",
+      "add_table_btn": "Dodaj stol",
+      "chairs_number": "Broj stolica",
+      "modal": {
+        "title": {
+          "add": "Dodaj stol ili više stolova",
+          "update": "Ažuriraj stol"
+        },
+        "table_id": "Redni broj stola:",
+        "tables_number": "Broj stolova:",
+        "chairs_number": "Broj stolica:",
+        "in_function": "U funkciji",
+        "remove_table_btn": "Ukloni stol"
+      },
+      "delete_modal": {
+        "title": "Brisanje stola",
+        "confirm_msg": "Da li sigurno želite obrisati stol s rednim brojem"
+      }
+    },
+    "images": {
+      "title": "Slike restorana",
+      "change_images_btn": "Promijeni slike",
+      "no_images": "Restoran nema slika.",
+      "modal": {
+        "title": "Promijeni slike restorana",
+        "choose_images_btn": "Izaberi slike"
+      }
+    },
+    "map": {
+      "title": "Lokacija",
+      "no_location": "Restoran nema postavljenu lokaciju.",
+      "modal": {
+        "title": "Izaberi lokaciju na mapi",
+        "latitude": "Geografska širina:",
+        "latitude_info": "(-90 do 90)",
+        "longitude": "Geografska dužina:",
+        "longitude_info": "(-180 do 180)",
+        "apply": "Primjeni",
+        "validation": {
+          "latitude": "Molimo unesite ispravnu vrijednost za širinu.",
+          "longitude": "Molimo unesite ispravnu vrijednost za dužinu."
+        },
+        "remove_location_btn": "Ukloni lokaciju"
+      },
+      "delete_modal": {
+        "title": "Brisanje lokacije restorana na mapi",
+        "confirm_msg": "Da li sigurno želite obrisati"
+      }
+    },
+    "working_hours": {
+      "title": "Radno vrijeme",
+      "closed": "Zatvoreno",
+      "no_working_hours": "Restoran nema postavljena radna vremena.",
+      "day": {
+        "monday": "Ponedjeljak",
+        "tuesday": "Utorak",
+        "wednesday": "Srijeda",
+        "thursday": "Četvrtak",
+        "friday": "Petak",
+        "saturday": "Subota",
+        "sunday": "Nedjelja"
+      },
+      "modal": {
+        "title": {
+          "add": "Dodaj radno vrijeme restorana",
+          "update": "Promijeni radno vrijeme restorana",
+          "info": "*Početak radnog vremena mora biti manje od kraja - osim 00:00 - 00:00"
+        },
+        "day": "Dan",
+        "start_time": "Početak vremena",
+        "end_time": "Kraj vremena",
+        "closed": "Zatvoreno",
+        "remove_working_hours_btn": "Ukloni rano vrijeme"
+      },
+      "delete_modal": {
+        "title": "Brisanje radnog vremena",
+        "confirm_msg": "Da li sigurno želite obrisati"
+      }
+    },
+    "tags": {
+      "title": "Oznake",
+      "no_tags": "Restoran nema oznaka.",
+      "modal": {
+        "title": "Izaberi oznake za restoran"
+      }
+    },
+    "payment_methods": {
+      "title": "Metode plaćanja",
+      "no_methods": "Restoran nema metode plaćanja.",
+      "modal": {
+        "title": "Izaberi metode plaćanja za restoran"
+      }
+    }
+  }
+}

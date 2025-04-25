@@ -1,0 +1,26 @@
+<div *ngIf="workingDays?.length == 0">
+  {{ "restaurant.working_hours.no_working_hours" | translate }}
+</div>
+
+<div
+  *ngFor="let workingDay of workingDays"
+  class="row"
+  [ngClass]="
+    workingDay.day == getDayOfWeek()
+      ? 'text-bg-danger bg-opacity-50 rounded-pill'
+      : ''
+  "
+>
+  <div class="col">
+    {{
+      "restaurant.working_hours.day." + getDayName(workingDay.day) | translate
+    }}
+  </div>
+  <div class="col">
+    {{
+      workingDay.isClosed
+        ? ("restaurant.working_hours.closed" | translate)
+        : workingDay.openTime + " - " + workingDay.closeTime
+    }}
+  </div>
+</div>

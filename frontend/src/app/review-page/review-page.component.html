@@ -1,0 +1,62 @@
+<app-public-navbar></app-public-navbar>
+<div class="review-page container-fluid bg-dark">
+    <h1 class="text-center my-4">OSTAVI RECENZIJU!</h1>
+  
+    <div class="row">
+      
+      <div class="col-md-6 text-center">
+        <img
+          src="/MojStolFrontend/src/assets/restaurant-placeholder.png"
+          alt="Restaurant"
+          class="img-fluid rounded"
+        />
+        <div class="mt-3">
+          <h4> {{ restaurant?.name }} </h4>
+          <p> {{ restaurant?.description }} </p>
+        </div>
+      </div>
+  
+      <div class="col-md-6">
+        <form (ngSubmit)="submitReview()">  
+          <div class="mb-3 text-center">
+            <label class="d-block">Ocjena:</label>
+            <div class="star-rating" [class.is-invalid]="errors['rating']">
+              <span *ngFor="let star of [1,2,3,4,5]" class="star-container">
+                <span class="star left-half" 
+                      (click)="setRating(star - 0.5)" 
+                      [ngClass]="{'filled': review.rating >= star - 0.5}">
+                      ⯨
+                </span>
+                <span class="star right-half" 
+                      (click)="setRating(star)" 
+                      [ngClass]="{'filled': review.rating >= star}">
+                      ⯩
+                </span>
+              </span>
+              <span *ngIf="errors['rating']" class="text-danger ms-2" [title]="errors['rating']">⚠</span>
+              <div *ngIf="errors['rating']" class="invalid-feedback d-block">{{ errors['rating'] }}</div>
+            </div>
+          </div>
+  
+          <div class="mb-3">
+            <textarea
+              class="form-control"
+              [class.is-invalid]="errors['comment']"
+              placeholder="Napiši recenziju..."
+              [(ngModel)]="review.comment"
+              name="comment"
+              rows="4"
+              required
+            ></textarea>
+            <span *ngIf="errors['comment']" class="text-danger ms-2" [title]="errors['comment']">⚠</span>
+            <div *ngIf="errors['comment']" class="invalid-feedback d-block">{{ errors['comment'] }}</div>
+          </div>
+  
+          <div class="text-center">
+            <button type="submit" class="btn btn-danger">Pošalji recenziju</button>
+          </div>
+        </form>
+      </div>
+    </div>
+</div>
+<app-footer></app-footer>

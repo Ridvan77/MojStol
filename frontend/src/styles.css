@@ -1,0 +1,191 @@
+/* You can add global styles to this file, and also import other style files */
+/* Override Bootstrap danger color */
+:root {
+    --bs-danger: #C3171D !important;
+    --bs-danger-rgb: 195, 23, 29 !important;
+}
+
+/* General styles for danger elements */
+.bg-danger {
+    background-color: #C3171D !important;
+}
+
+.text-danger {
+    color: #C3171D !important;
+}
+
+.border-danger {
+    border-color: #C3171D !important;
+}
+
+/* Button styles */
+.btn-danger {
+    background-color: #C3171D !important;
+    border-color: #A51419 !important;
+    color: #fff !important;
+}
+
+.btn-danger:hover {
+    background-color: #A51419 !important;
+    border-color: #8A1014 !important;
+}
+
+.btn-danger:focus, .btn-danger:active {
+    background-color: #8A1014 !important;
+    border-color: #6F0C0F !important;
+    box-shadow: 0 0 0 0.25rem rgba(195, 23, 29, 0.5) !important;
+}
+
+.btn-outline-danger {
+    color: #C3171D !important;
+    border-color: #C3171D !important;
+}
+
+.btn-outline-danger:hover {
+    color: #fff !important;
+    background-color: #C3171D !important;
+}
+
+/* Alerts */
+.alert-danger {
+    background-color: #F8D7DA !important;
+    border-color: #C3171D !important;
+    color: #C3171D !important;
+}
+
+/* Progress bars */
+.progress-bar-danger {
+    background-color: #C3171D !important;
+}
+
+/* List groups */
+.list-group-item-danger {
+    background-color: #F8D7DA !important;
+    color: #C3171D !important;
+}
+
+.list-group-item-danger.list-group-item-action:hover,
+.list-group-item-danger.list-group-item-action:focus {
+    background-color: #f5c2c7 !important;
+    color: #A51419 !important;
+}
+
+/* Badges */
+.badge.bg-danger {
+    background-color: #C3171D !important;
+}
+
+/* Tables */
+.table-danger {
+    background-color: #F8D7DA !important;
+}
+
+.table-danger > td,
+.table-danger > th {
+    background-color: #F8D7DA !important;
+}
+
+/* Forms */
+.form-control:focus {
+    border-color: #C3171D !important;
+    box-shadow: 0 0 0 0.25rem rgba(195, 23, 29, 0.25) !important;
+}
+
+.form-check-input:checked {
+    background-color: #C3171D !important;
+    border-color: #C3171D !important;
+}
+
+.form-select:focus {
+    border-color: #C3171D !important;
+    box-shadow: 0 0 0 0.25rem rgba(195, 23, 29, 0.25) !important;
+}
+
+.is-invalid {
+    border-color: #C3171D !important;
+}
+
+.invalid-feedback {
+    color: #C3171D !important;
+}
+
+/* Pagination */
+.page-item.active .page-link {
+    background-color: #C3171D !important;
+    border-color: #C3171D !important;
+}
+
+.page-link:focus {
+    box-shadow: 0 0 0 0.25rem rgba(195, 23, 29, 0.25) !important;
+}
+
+/* Spinners */
+.spinner-border-danger {
+    color: #C3171D !important;
+}
+
+/* Links */
+a.text-danger:hover,
+a.text-danger:focus {
+    color: #A51419 !important;
+}
+
+/* Dropdown */
+.dropdown-item.active,
+.dropdown-item:active {
+    background-color: #C3171D !important;
+}
+
+/* Nav tabs */
+.nav-tabs .nav-link.active {
+    color: #C3171D !important;
+    border-color: #C3171D !important;
+}
+
+/* Custom range input */
+.form-range::-webkit-slider-thumb {
+    background: #C3171D !important;
+}
+
+.form-range::-moz-range-thumb {
+    background: #C3171D !important;
+}
+
+/* Switch */
+.form-switch .form-check-input:checked {
+    background-color: #C3171D !important;
+    border-color: #C3171D !important;
+}
+
+/* Toast */
+.toast-danger {
+    background-color: #F8D7DA !important;
+    border-color: #C3171D !important;
+}
+
+/* Modal */
+.modal-danger .modal-header {
+    background-color: #C3171D !important;
+    color: #fff !important;
+}
+
+/* Accordion */
+.accordion-button:not(.collapsed) {
+    color: #C3171D !important;
+    background-color: rgba(195, 23, 29, 0.1) !important;
+}
+
+.accordion-button:focus {
+    border-color: #C3171D !important;
+    box-shadow: 0 0 0 0.25rem rgba(195, 23, 29, 0.25) !important;
+}
+
+/* Text selection */
+::selection {
+    background: #C3171D !important;
+    color: #ffffff !important;
+}
+
+.navbar-brand img {
+    height:40px;
+}

@@ -1,0 +1,108 @@
+<div class="container mx-auto py-5">
+  <div class="row shadow rounded">
+    <div class="col-12 col-lg-7 bg-light py-5 px-2 px-lg-5 rounded-start-2">
+        <a routerLink="/" class="text-decoration-none text-black opacity-75"><i class="bi bi-arrow-left"></i> Back</a>
+        <p class="fs-2 mt-3 text-danger">Welcome to MojStol</p>
+        <p class="fs-6 opacity-75">Application through which you can quickly and easily reserve your table in your favorite restaurant!</p>
+  
+        <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="row mt-5">
+          <div class="col-6 mb-3">
+            <label class="form-label">First name</label>
+            <input 
+              formControlName="name" 
+              type="text" 
+              class="form-control"
+              [ngClass]="{ 'is-invalid': f['name'].touched && f['name'].errors }">
+          </div>
+          <div class="col-6 mb-3">
+            <label class="form-label">Last name</label>
+            <input 
+              formControlName="surname" 
+              type="text" 
+              class="form-control"
+              [ngClass]="{ 'is-invalid': f['surname'].touched && f['surname'].errors }">
+          </div>
+          <div class="col-12 mb-3">
+            <label class="form-label">Email address</label>
+            <input 
+              formControlName="email" 
+              type="email" 
+              class="form-control"
+              [ngClass]="{ 'is-invalid': f['email'].touched && f['email'].errors }">
+          </div>
+          <div class="col-12 mb-3">
+            <label class="form-label">Password</label>
+            <div class="input-group">
+              <input 
+                formControlName="password" 
+                [type]="showPassword ? 'text' : 'password'"
+                class="form-control"
+                [ngClass]="{ 'is-invalid': f['password'].touched && f['password'].errors }">
+              <button 
+                class="btn btn-outline-secondary" 
+                type="button" 
+                (click)="togglePasswordVisibility()">
+                <i class="bi" [ngClass]="showPassword ? 'bi-eye-slash' : 'bi-eye'"></i>
+              </button>
+            </div>
+          </div>
+          <div class="col-12 mb-3">
+            <label class="form-label">Select Role</label>
+            <select 
+              formControlName="roleID" 
+              class="form-select"
+              [ngClass]="{ 'is-invalid': f['roleID'].touched && f['roleID'].errors }">
+              <option value="">Select a role</option>
+              <option *ngFor="let role of roles" [value]="role.roleID">{{ role.name }}</option>
+            </select>
+          </div>
+          
+          <div class="col-12 mb-3">
+            <button type="submit" class="btn btn-danger w-100" [disabled]="registerForm.invalid">
+              Register
+            </button>
+
+            <!-- Validation messages below the button -->
+            <div *ngIf="registerForm.invalid" class="text-danger mt-2 small">
+              <div *ngIf="f['name'].errors?.['required'] && f['name'].touched">
+                * First name is required
+              </div>
+              <div *ngIf="f['name'].errors?.['minlength'] && f['name'].touched">
+                * First name must be at least 2 characters long
+              </div>
+
+              <div *ngIf="f['surname'].errors?.['required'] && f['surname'].touched">
+                * Last name is required
+              </div>
+              <div *ngIf="f['surname'].errors?.['minlength'] && f['surname'].touched">
+                * Last name must be at least 2 characters long
+              </div>
+
+              <div *ngIf="f['email'].errors?.['required'] && f['email'].touched">
+                * Email is required
+              </div>
+              <div *ngIf="f['email'].errors?.['email'] && f['email'].touched">
+                * Please enter a valid email address
+              </div>
+
+              <div *ngIf="f['password'].errors?.['required'] && f['password'].touched">
+                * Password is required
+              </div>
+              <div *ngIf="f['password'].errors?.['minlength'] && f['password'].touched">
+                * Password must be at least 6 characters long (currently {{ f['password'].value?.length || 0 }} characters)
+              </div>
+
+              <div *ngIf="f['roleID'].errors?.['required'] && f['roleID'].touched">
+                * Please select a role
+              </div>
+            </div>
+          </div>
+        </form>
+  
+        <p class="fs-6 opacity-75 text-center">Vec imas profil? <a routerLink="/login" class="text-decoration-none text-dark fw-semibold">Prijavi se</a></p>
+      </div>
+      <div class="col-12 col-lg-5 border rounded-end-2" style="background-image: url('../../../assets/images/login.jpg'); background-size: contain; background-position: center;">
+      </div>
+    </div>
+  </div>
+  

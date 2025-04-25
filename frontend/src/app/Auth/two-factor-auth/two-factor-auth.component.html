@@ -1,0 +1,18 @@
+<div class="modal fade show" style="display: block;" aria-modal="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Please enter 2FA Code</h5>
+        </div>
+        <div class="modal-body">
+          <label for="twoFactorCode">2FA Code</label>
+          <input type="text" [(ngModel)]="twoFactorCode" class="form-control" id="twoFactorCode">
+        </div>
+        <div class="modal-footer d-flex justify-content-between">
+          <button type="button" class="btn btn-light" (click)="onResendCode()">Send new code</button>
+          <button class="btn btn-danger" (click)="onVerify2FA()">Verify</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  

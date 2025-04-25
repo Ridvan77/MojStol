@@ -1,0 +1,264 @@
+<nav class="navbar navbar-expand-lg bg-light border sticky-top">
+  <div class="container">
+    <a class="navbar-brand" routerLink="/"
+      ><img
+        src="../../../assets/images/LogoDark.svg"
+        alt="Logo"
+        class="img-fluid"
+    /></a>
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarTogglerDemo02"
+      aria-controls="navbarTogglerDemo02"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <!-- Public Navigation -->
+        <ng-container
+          *ngIf="
+            userRole != 'User' && userRole != 'Owner' && userRole != 'Admin'
+          "
+        >
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" routerLink="/"
+              >Home</a
+            >
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/restaurants">Restaurants</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#cities">Cities</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a
+              class="nav-link dropdown-toggle"
+              href="#"
+              role="button"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            >
+              More
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="/about-us">About Us</a></li>
+              <li><a class="dropdown-item" href="/contact-us">Contact</a></li>
+              <li><a class="dropdown-item" href="/faq">FAQ</a></li>
+            </ul>
+          </li>
+        </ng-container>
+
+        <!-- Admin Navigation -->
+        <ng-container *ngIf="userRole === 'Admin'">
+          <li class="nav-item">
+            <a
+              class="nav-link"
+              routerLink="/admin/dashboard"
+              routerLinkActive="active"
+              >Dashboard</a
+            >
+          </li>
+          <li class="nav-item">
+            <a
+              class="nav-link"
+              routerLink="/admin/users"
+              routerLinkActive="active"
+              >Users</a
+            >
+          </li>
+          <li class="nav-item">
+            <a
+              class="nav-link"
+              routerLink="/admin/owners"
+              routerLinkActive="active"
+              >Owners</a
+            >
+          </li>
+          <li class="nav-item">
+            <a
+              class="nav-link"
+              routerLink="/admin/restaurants"
+              routerLinkActive="active"
+              >Restaurants</a
+            >
+          </li>
+          <li class="nav-item">
+            <a
+              class="nav-link"
+              routerLink="/admin/reservation"
+              routerLinkActive="active"
+              >Reservations</a
+            >
+          </li>
+        </ng-container>
+
+        <!-- Owner Navigation -->
+        <ng-container *ngIf="userRole === 'Owner'">
+          <li class="nav-item">
+            <a
+              class="nav-link"
+              routerLink="/owner/dashboard"
+              routerLinkActive="active"
+              >Dashboard</a
+            >
+          </li>
+          <li class="nav-item">
+            <a
+              class="nav-link"
+              routerLink="/owner/restaurants"
+              routerLinkActive="active"
+              >My Restaurants</a
+            >
+          </li>
+          <li class="nav-item">
+            <a
+              class="nav-link"
+              routerLink="/owner/reservations"
+              routerLinkActive="active"
+              >My Reservations</a
+            >
+          </li>
+          <li class="nav-item">
+            <a
+              class="nav-link"
+              routerLink="/owner/qr-scanner"
+              routerLinkActive="active"
+              >QR Scanner</a
+            >
+          </li>
+        </ng-container>
+
+        <!-- User Navigation -->
+        <ng-container *ngIf="userRole === 'User'">
+          <li class="nav-item">
+            <a
+              class="nav-link"
+              routerLink="/restaurants"
+              routerLinkActive="active"
+              >Restaurants</a
+            >
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#cities">Cities</a>
+          </li>
+          <li class="nav-item">
+            <a
+              class="nav-link"
+              routerLink="/user/reservations"
+              routerLinkActive="active"
+              >My Reservations</a
+            >
+          </li>
+          <li class="nav-item">
+            <a
+              class="nav-link"
+              routerLink="/my-favourites"
+              routerLinkActive="active"
+              >My Favourites</a
+            >
+          </li>
+          <li class="nav-item">
+            <a
+              class="nav-link"
+              routerLink="/my-visit-agains"
+              routerLinkActive="active"
+              >Visit Again</a
+            >
+          </li>
+          <li class="nav-item dropdown">
+            <a
+              class="nav-link dropdown-toggle"
+              href="#"
+              role="button"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            >
+              More
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="/about-us">About Us</a></li>
+              <li><a class="dropdown-item" href="/contact-us">Contact</a></li>
+              <li><a class="dropdown-item" href="/faq">FAQ</a></li>
+            </ul>
+          </li>
+        </ng-container>
+      </ul>
+
+      <!-- Login/Register buttons for non-authenticated users -->
+      <form class="d-flex" role="search">
+        <!-- Language Selector -->
+        <li class="me-2 nav-item dropdown align-self-center list-unstyled">
+          <button
+            class="btn btn-outline-light dropdown-toggle"
+            type="button"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            <img [src]="selectedLanguage.image" />
+            <!-- {{ "language." + selectedLanguage.name | translate }} -->
+          </button>
+          <ul class="dropdown-menu">
+            <li *ngFor="let language of languages">
+              <button
+                class="dropdown-item"
+                (click)="selectLanguage(language.symbol)"
+              >
+                <img [src]="language.image" />
+                {{ "language." + language.name | translate }}
+              </button>
+            </li>
+          </ul>
+        </li>
+
+        <ng-container *ngIf="!isLoggedIn; else loggedInTemplate">
+          <a class="btn btn-danger me-2" routerLink="/login">Login</a>
+          <a class="btn btn-outline-danger" routerLink="/register">Register</a>
+        </ng-container>
+
+        <!-- Dropdown menu for authenticated users -->
+        <ng-template #loggedInTemplate>
+          <div class="dropdown">
+            <button
+              class="btn btn-outline-danger dropdown-toggle"
+              type="button"
+              id="dropdownMenuButton"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            >
+              Hi, {{ userName }}
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+              <li>
+                <a class="dropdown-item" routerLink="/user-detail/{{ userId }}"
+                  >Profile</a
+                >
+              </li>
+
+              <!-- Admin Dropdown -->
+              <ng-container *ngIf="userRole === 'Admin'">
+                <li>
+                  <a class="dropdown-item" routerLink="/admin/settings"
+                    >Settings</a
+                  >
+                </li>
+              </ng-container>
+              <li><hr class="dropdown-divider" /></li>
+
+              <li>
+                <a class="dropdown-item text-danger" (click)="logout()"
+                  >Logout</a
+                >
+              </li>
+            </ul>
+          </div>
+        </ng-template>
+      </form>
+    </div>
+  </div>
+</nav>

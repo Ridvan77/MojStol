@@ -1,0 +1,4 @@
+<div *ngIf="hasLocation() == false" class="px-3 pb-2">
+  {{ "restaurant.map.no_location" | translate }}
+</div>
+<div *ngIf="hasLocation() == true" id="map-view"></div>

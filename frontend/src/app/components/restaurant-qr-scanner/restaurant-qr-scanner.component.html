@@ -1,0 +1,16 @@
+<div class="mx-auto pb-5 pt-4" style="width: 600px">
+  <h2>Scan Reservation QR Code</h2>
+  <zxing-scanner (scanSuccess)="onScanSuccess($event)"></zxing-scanner>
+
+  <div
+    *ngIf="
+      !errorMessage && request.reservationId !== 0 && request.ownerId !== 0
+    "
+  >
+    <p>✅ Reservation scanned succesfully</p>
+  </div>
+
+  <div *ngIf="errorMessage">
+    <p style="color: red">❌ {{ errorMessage }}</p>
+  </div>
+</div>

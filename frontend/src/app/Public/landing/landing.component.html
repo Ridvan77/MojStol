@@ -1,0 +1,190 @@
+<app-public-navbar></app-public-navbar>
+
+<div class="container-fluid py-5 landing-search-box">
+  <div class="container py-5 text-center text-white landing-search-box-content">
+    <h4>Looking for a table?</h4>
+    <h2>Find your favorite restaurant here!</h2>
+    <div class="row py-5">
+      <div class="col-12 col-lg-4 py-3">
+        <div class="dropdown w-75 mx-auto">
+          <button
+            class="btn btn-light dropdown-toggle w-100"
+            type="button"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            {{ selectedTypeName || "Restaurant categories" }}
+          </button>
+          <ul class="dropdown-menu w-100">
+            <li *ngFor="let type of restaurantTypes">
+              <a
+                class="dropdown-item"
+                href="#"
+                (click)="onTypeSelect(+type.id, type.name)"
+                >{{ type.name }}</a
+              >
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="col-12 col-lg-4 py-3">
+        <div class="dropdown w-75 mx-auto">
+          <button
+            class="btn btn-light dropdown-toggle w-100"
+            type="button"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            {{ selectedCityName || "Select City" }}
+          </button>
+          <ul class="dropdown-menu w-100">
+            <li *ngFor="let city of cities">
+              <a
+                class="dropdown-item"
+                href="#"
+                (click)="onCitySelect(+city.id, city.name)"
+                >{{ city.name }}</a
+              >
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="col-12 col-lg-4 py-3">
+        <button
+          type="button"
+          class="btn btn-danger w-75"
+          (click)="findRestaurants()"
+        >
+          Find a restaurant!
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ovdje izlistati sve restorane po kategorijama -->
+
+<!-- Template za izlistavanje restorana po kategorijama -->
+<div class="container-fluid py-5">
+  <div class="container">
+    <p class="fs-3 text-danger">Best restaurants in Bosnia and Herzegovina</p>
+    <hr class="border-dark" />
+  </div>
+  <div
+    class="container restaurants-container position-relative carousel slide"
+    id="carouselExample"
+    data-bs-ride="carousel"
+  >
+    <div
+      class="restaurant-card carousel-inner"
+      *ngFor="let restaurant of bestRestaurants"
+    >
+      <a href="restaurants/{{ restaurant.id }}" class="text-decoration-none">
+        <div class="restaurant-info">
+          <h5>{{ restaurant.name }}</h5>
+          <p>{{ restaurant.restaurantType?.name }}</p>
+          <div class="stars">
+            <span *ngFor="let star of getFullStars(restaurant.averageRating)"
+              >★</span
+            >
+            <span *ngIf="hasHalfStar(restaurant.averageRating)">⯪</span>
+            <span *ngFor="let star of getEmptyStars(restaurant.averageRating)"
+              >☆</span
+            >
+          </div>
+        </div>
+      </a>
+    </div>
+  </div>
+</div>
+
+<div class="container-fluid py-5">
+  <div class="container">
+    <p class="fs-3 text-danger">Most visited restaurants</p>
+    <hr class="border-dark" />
+  </div>
+  <div
+    class="container restaurants-container position-relative carousel slide"
+    id="carouselExample"
+    data-bs-ride="carousel"
+  >
+    <div
+      class="restaurant-card carousel-inner"
+      *ngFor="let restaurant of mostVisitedRestaurants"
+    >
+      <a href="restaurants/{{ restaurant.id }}" class="text-decoration-none">
+        <div class="restaurant-info">
+          <h5>{{ restaurant.name }}</h5>
+          <p>{{ restaurant.restaurantType?.name }}</p>
+          <div class="stars">
+            <span *ngFor="let star of getFullStars(restaurant.averageRating)"
+              >★</span
+            >
+            <span *ngIf="hasHalfStar(restaurant.averageRating)">⯪</span>
+            <span *ngFor="let star of getEmptyStars(restaurant.averageRating)"
+              >☆</span
+            >
+          </div>
+        </div>
+      </a>
+    </div>
+  </div>
+</div>
+
+<div
+  *ngIf="userID != 0 && mostVisitedRestaurantsByUserID[0] != undefined"
+  class="container-fluid py-5"
+>
+  <div class="container">
+    <p class="fs-3 text-danger">Your most visited restaurants</p>
+    <hr class="border-dark" />
+  </div>
+  <div
+    class="container restaurants-container position-relative carousel slide"
+    id="carouselExample"
+    data-bs-ride="carousel"
+  >
+    <div
+      class="restaurant-card carousel-inner"
+      *ngFor="let restaurant of mostVisitedRestaurantsByUserID"
+    >
+      <a href="restaurants/{{ restaurant.id }}" class="text-decoration-none">
+        <div class="restaurant-info">
+          <h5>{{ restaurant.name }}</h5>
+          <p>{{ restaurant.restaurantType?.name }}</p>
+          <div class="stars">
+            <span *ngFor="let star of getFullStars(restaurant.averageRating)"
+              >★</span
+            >
+            <span *ngIf="hasHalfStar(restaurant.averageRating)">⯪</span>
+            <span *ngFor="let star of getEmptyStars(restaurant.averageRating)"
+              >☆</span
+            >
+          </div>
+        </div>
+      </a>
+    </div>
+  </div>
+</div>
+
+<div class="container-fluid bg-light py-5" id="cities">
+  <div class="container">
+    <p class="fs-3 text-danger">Choose a city</p>
+    <hr class="border-dark" />
+    <div class="row">
+      <div class="col-6 col-lg-3 py-2" *ngFor="let city of cities">
+        <a
+          class="text-decoration-none opacity-75 text-dark fs-5"
+          [routerLink]="['/restaurants']"
+          [queryParams]="{ cityId: city.id }"
+        >
+          {{ city.name }}
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-engagement-section></app-engagement-section>
+
+<app-footer></app-footer>

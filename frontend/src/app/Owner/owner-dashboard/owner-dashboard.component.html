@@ -1,0 +1,118 @@
+<div class="container my-5">
+    <div class="row">
+        <div class="col-12 col-lg-6 border p-4 bg-light rounded shadow-sm">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h3 class="text-danger m-0">
+                    Add Restaurant
+                </h3>
+            </div>
+            
+            <div class="text-center p-4 rounded">
+                <i class="bi bi-building-add text-danger" style="font-size: 3rem;"></i>
+                <p class="text-muted mt-3 mb-4">Create a new restaurant</p>
+                <button type="button" 
+                        class="btn btn-danger d-flex align-items-center mx-auto px-4 py-2" 
+                        data-bs-toggle="modal" 
+                        data-bs-target="#addRestaurantModal">
+                    <i class="bi bi-plus-lg me-2"></i>
+                    Add New Restaurant
+                </button>
+            </div>
+        </div>
+
+        <div class="col-12 col-lg-6 border p-4">
+            <h3 class="mb-4 text-danger">My Restaurants</h3>
+            <div class="list-group">
+                <div *ngFor="let restaurant of userRestaurants" class="list-group-item list-group-item-action">
+                    <div class="d-flex w-100 justify-content-between align-items-center">
+                        <h6 class="mb-1">{{restaurant.name}}</h6>
+                        <button class="btn btn-light btn-sm" (click)="deleteRestaurant(+restaurant.id)">
+                            <i class="bi bi-trash"></i>
+                        </button>
+                    </div>
+                </div>
+                
+                <div *ngIf="userRestaurants.length === 0" class="text-center p-3">
+                    <p class="text-muted">Nemate još dodanih restorana</p>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+</div>
+
+
+  <!-- Modal -->
+  <div class="modal fade" id="addRestaurantModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title text-danger" id="exampleModalLabel">Add New Restaurant</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body py-4">
+            <form [formGroup]="restaurantForm" (ngSubmit)="onSubmit()">
+                <div class="mb-3">
+                    <label for="name" class="form-label">Restaurant Name</label>
+                    <input type="text" class="form-control" id="name" formControlName="name">
+                </div>
+                
+                <div class="mb-3">
+                    <label for="description" class="form-label">Description</label>
+                    <textarea class="form-control" id="description" formControlName="description" rows="3"></textarea>
+                </div>
+                
+                <div class="mb-3">
+                    <label for="contactNumber" class="form-label">Contact Number</label>
+                    <input type="tel" class="form-control" id="contactNumber" formControlName="contactNumber">
+                </div>
+                
+                <div class="mb-3">
+                    <label for="contactEmail" class="form-label">Email</label>
+                    <input type="email" class="form-control" id="contactEmail" formControlName="contactEmail">
+                </div>
+                
+                <div class="mb-3">
+                    <label for="street" class="form-label">Street Address</label>
+                    <input type="text" class="form-control" id="street" formControlName="street">
+                </div>
+                
+                <div class="mb-3">
+                    <label for="cityId" class="form-label">City</label>
+                    <select class="form-select" id="cityId" formControlName="cityId">
+                        <option *ngFor="let city of cities" [value]="city.id">
+                            {{city.name}}
+                        </option>
+                    </select>
+                    <div class="invalid-feedback" 
+                         *ngIf="restaurantForm.get('cityId')?.invalid && restaurantForm.get('cityId')?.touched">
+                        Please select a city
+                    </div>
+                </div>
+                
+                <div class="mb-3">
+                    <label for="restaurantTypeId" class="form-label">Restaurant Type</label>
+                    <select class="form-select" id="restaurantTypeId" formControlName="restaurantTypeId">
+                        <option *ngFor="let type of restaurantTypes" [value]="type.id">
+                            {{type.name}}
+                        </option>
+                    </select>
+                    <div class="invalid-feedback" 
+                         *ngIf="restaurantForm.get('restaurantTypeId')?.invalid && restaurantForm.get('restaurantTypeId')?.touched">
+                        Please select a restaurant type
+                    </div>
+                </div>
+                
+                <div class="mb-3">
+                    <label for="webSite" class="form-label">Website</label>
+                    <input type="url" class="form-control" id="webSite" formControlName="webSite">
+                </div>
+                
+
+                <button type="submit" class="btn btn-danger float-end" [disabled]="!restaurantForm.valid">Add Restaurant</button>
+            </form>
+        </div>
+
+      </div>
+    </div>
+  </div>

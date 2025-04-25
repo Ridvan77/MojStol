@@ -1,0 +1,243 @@
+<!-- <app-public-navbar></app-public-navbar> -->
+
+<section class="container-fluid">
+  <div class="container pt-3">
+    <div class="d-flex align-items-end gap-2">
+      <div class="display-6 me-4">
+        {{ "restaurant_list.search_restaurants" | translate }}
+      </div>
+      <div class="dropdown">
+        <button
+          class="btn btn-secondary dropdown-toggle"
+          type="button"
+          data-bs-toggle="dropdown"
+          aria-expanded="false"
+        >
+          {{ selectedCity.name }}
+        </button>
+        <ul class="dropdown-menu">
+          <li *ngFor="let city of cityList">
+            <button class="dropdown-item" (click)="selectCity(city)">
+              {{ city.name }}
+            </button>
+          </li>
+        </ul>
+      </div>
+
+      <div class="dropdown">
+        <button
+          class="btn btn-secondary dropdown-toggle"
+          type="button"
+          data-bs-toggle="dropdown"
+          aria-expanded="false"
+        >
+          {{ selectedRestaurantType.name }}
+        </button>
+        <ul class="dropdown-menu">
+          <li *ngFor="let restaurantType of typeList">
+            <button
+              class="dropdown-item"
+              (click)="selectRestaurantType(restaurantType)"
+            >
+              {{ restaurantType.name }}
+            </button>
+          </li>
+        </ul>
+      </div>
+
+      <div class="dropdown">
+        <button
+          class="btn btn-secondary dropdown-toggle"
+          type="button"
+          data-bs-toggle="dropdown"
+          data-bs-auto-close="outside"
+          aria-expanded="false"
+        >
+          {{ "restaurant_list.tags" | translate }}
+        </button>
+        <ul class="dropdown-menu">
+          <li *ngFor="let tag of tagList">
+            <div class="dropdown-item-text">
+              <div class="form-check">
+                <input
+                  class="form-check-input"
+                  type="checkbox"
+                  id="{{ 'tag-' + tag.tagID }}"
+                  (change)="toggleTagSelection(tag.tagID)"
+                  [checked]="selectedTags.includes(tag.tagID)"
+                />
+                <label class="form-check-label" for="{{ 'tag-' + tag.tagID }}"
+                  >{{ tag.name }}
+                </label>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      <div class="dropdown">
+        <button
+          class="btn btn-secondary dropdown-toggle"
+          type="button"
+          data-bs-toggle="dropdown"
+          data-bs-auto-close="outside"
+          aria-expanded="false"
+        >
+          {{ "restaurant_list.payment_methods" | translate }}
+        </button>
+        <ul class="dropdown-menu">
+          <li *ngFor="let paymentMethod of paymentMethodList">
+            <div class="dropdown-item-text">
+              <div class="form-check">
+                <input
+                  class="form-check-input"
+                  type="checkbox"
+                  id="{{ 'payment-method-' + paymentMethod.paymentMethodID }}"
+                  (change)="
+                    togglePaymentMethodSelection(paymentMethod.paymentMethodID)
+                  "
+                  [checked]="
+                    selectedPaymentMethods.includes(
+                      paymentMethod.paymentMethodID
+                    )
+                  "
+                />
+                <label
+                  class="form-check-label"
+                  for="{{ 'payment-method-' + paymentMethod.paymentMethodID }}"
+                  >{{ paymentMethod.name }}
+                </label>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      <div class="dropdown">
+        <button
+          class="btn btn-secondary dropdown-toggle"
+          type="button"
+          data-bs-toggle="dropdown"
+          data-bs-auto-close="outside"
+          aria-expanded="false"
+        >
+          {{ "restaurant_list.facilities" | translate }}
+        </button>
+        <ul class="dropdown-menu">
+          <li *ngFor="let facility of facilityList">
+            <div class="dropdown-item-text">
+              <div class="form-check">
+                <input
+                  class="form-check-input"
+                  type="checkbox"
+                  id="{{ 'facility-' + facility.facilitiesID }}"
+                  (change)="toggleFacilitySelection(facility.facilitiesID)"
+                  [checked]="selectedFacilities.includes(facility.facilitiesID)"
+                />
+                <label
+                  class="form-check-label"
+                  for="{{ 'facility-' + facility.facilitiesID }}"
+                  >{{ facility.name }}
+                </label>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <hr />
+  </div>
+</section>
+
+<section class="container-fluid">
+  <div class="container py-3">
+    <div class="row g-5">
+      <div *ngFor="let restaurant of restaurantList" class="col-4">
+        <div class="card ratio ratio-16x9 overflow-hidden rounded-4 shadow">
+          <div
+            class="d-flex flex-column justify-content-between p-3 text-decoration-none text-white"
+            id="restaurant-card"
+          >
+            <span id="bookmark" class="align-self-end text-warning fs-4">
+              <i
+                class="bi bi-bookmark-fill"
+                (click)="addFavourite(restaurant.id)"
+              ></i>
+              <!-- <i class="bi bi-bookmark"></i> -->
+            </span>
+            <div>
+              <a class="text-white" [routerLink]="restaurant.id"
+                >#{{ restaurant?.id }} {{ restaurant?.name }}</a
+              >
+              <div class="d-flex justify-content-between">
+                <span>{{ restaurant.restaurantType?.name }}</span>
+                <app-stars-rating
+                  [rating]="restaurant?.averageRating"
+                ></app-stars-rating>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div
+      *ngIf="restaurantList.length == 0"
+      class="d-flex flex-column justify-content-center align-items-center"
+    >
+      <div class="w-25">
+        <img
+          class="img-fluid"
+          src="assets/images/search-pana.png"
+          alt="Search site"
+        />
+      </div>
+      <div class="display-6">{{ "restaurant_list.empty" | translate }}</div>
+      <button class="btn btn-danger mt-3" (click)="clearFilters()">
+        {{ "restaurant_list.clear_filters_btn" | translate }}
+      </button>
+    </div>
+  </div>
+
+  <nav
+    *ngIf="restaurantList.length > 0"
+    class="container mt-2"
+    aria-label="Page navigation example"
+  >
+    <ul class="pagination justify-content-center">
+      <li class="page-item" [class.disabled]="pageNumber == 1">
+        <a class="page-link" (click)="goToPage(1)"
+          ><i class="bi bi-chevron-double-left"></i
+        ></a>
+      </li>
+      <li class="page-item me-2" [class.disabled]="pageNumber == 1">
+        <a class="page-link" (click)="previousPage()"
+          ><i class="bi bi-chevron-left"></i
+        ></a>
+      </li>
+
+      <li
+        class="page-item"
+        [class.active]="pageNumber == i + 1"
+        *ngFor="let page of [].constructor(totalPages); let i = index"
+      >
+        <a class="page-link" (click)="goToPage(i + 1)">{{ i + 1 }}</a>
+      </li>
+
+      <li class="page-item ms-2" [class.disabled]="pageNumber == totalPages">
+        <a class="page-link" (click)="nextPage()"
+          ><i class="bi bi-chevron-right"></i
+        ></a>
+      </li>
+      <li class="page-item" [class.disabled]="pageNumber == totalPages">
+        <a class="page-link" (click)="goToPage(totalPages)"
+          ><i class="bi bi-chevron-double-right"></i
+        ></a>
+      </li>
+    </ul>
+  </nav>
+</section>
+
+<app-engagement-section></app-engagement-section>
+
+<!-- <app-footer></app-footer> -->

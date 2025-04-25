@@ -1,0 +1,127 @@
+<div *ngIf="restaurant">
+  <div
+    class="modal fade show"
+    id="exampleModalLive"
+    tabindex="-1"
+    aria-labelledby="exampleModalLiveLabel"
+    aria-modal="true"
+    role="dialog"
+    style="display: block"
+  >
+    <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLiveLabel">
+            {{ "restaurant.edit_modal.title" | translate }}
+          </h1>
+          <button
+            class="btn-close"
+            data-bs-dismiss="modal"
+            (click)="closeModal()"
+            aria-label="Close"
+          ></button>
+        </div>
+        <div class="modal-body">
+          <form [formGroup]="form">
+            <div>
+              <label class="form-label"
+                >{{ "restaurant.edit_modal.name" | translate }}
+              </label>
+              <input
+                [class.is-invalid]="isInvalid('name')"
+                class="form-control"
+                formControlName="name"
+              />
+              <div class="invalid-feedback">
+                {{ "restaurant.edit_modal.validation.name" | translate }}
+              </div>
+            </div>
+            <div class="mt-3">
+              <label class="form-label">{{
+                "restaurant.edit_modal.description" | translate
+              }}</label>
+              <textarea
+                [class.is-invalid]="isInvalid('description')"
+                class="form-control"
+                formControlName="description"
+              ></textarea>
+              <div class="invalid-feedback">
+                {{ "restaurant.edit_modal.validation.description" | translate }}
+              </div>
+            </div>
+            <div class="mt-3">
+              <label class="form-label">
+                {{ "restaurant.edit_modal.phone" | translate }}
+              </label>
+              <input
+                [class.is-invalid]="isInvalid('contactNumber')"
+                class="form-control"
+                formControlName="contactNumber"
+              />
+              <div class="invalid-feedback">
+                {{ "restaurant.edit_modal.validation.phone" | translate }}
+              </div>
+            </div>
+            <div class="mt-3">
+              <label class="form-label">
+                {{ "restaurant.edit_modal.email" | translate }}</label
+              >
+              <input
+                [class.is-invalid]="isInvalid('contactEmail')"
+                class="form-control"
+                formControlName="contactEmail"
+              />
+              <div class="invalid-feedback">
+                {{ "restaurant.edit_modal.validation.email" | translate }}
+              </div>
+            </div>
+            <div class="mt-3">
+              <label class="form-label">
+                {{ "restaurant.edit_modal.street" | translate }}
+              </label>
+              <input
+                [class.is-invalid]="isInvalid('street')"
+                class="form-control"
+                formControlName="street"
+              />
+              <div class="invalid-feedback">
+                {{ "restaurant.edit_modal.validation.street" | translate }}
+              </div>
+            </div>
+            <div class="mt-3">
+              <label class="form-label">
+                {{ "restaurant.edit_modal.website" | translate }}
+              </label>
+              <input
+                [class.is-invalid]="isInvalid('webSite')"
+                class="form-control"
+                formControlName="webSite"
+              />
+              <div class="invalid-feedback">
+                {{ "restaurant.edit_modal.validation.website" | translate }}
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button
+            type="button"
+            class="btn btn-secondary"
+            (click)="closeModal()"
+            data-bs-dismiss="modal"
+          >
+            {{ "restaurant.modal.close" | translate }}
+          </button>
+          <button
+            [disabled]="!enableSave()"
+            type="button"
+            class="btn btn-danger"
+            (click)="saveChanges()"
+          >
+            {{ "restaurant.modal.save" | translate }}
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

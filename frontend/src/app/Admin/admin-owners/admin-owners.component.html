@@ -1,0 +1,131 @@
+<div class="container mt-4">
+  <!-- Stats Cards -->
+  <div class="row mb-4">
+    <div class="col-md-6">
+      <div class="card border-0 shadow-sm">
+        <div class="card-body d-flex align-items-center">
+          <div class="rounded-circle bg-danger bg-opacity-10 p-3 me-3">
+            <i class="fas fa-users text-white fa-2x"></i>
+          </div>
+          <div>
+            <h6 class="text-muted mb-1">Total Owners</h6>
+            <h2 class="mb-0 fw-bold">{{users.length}}</h2>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="card border-0 shadow-sm">
+        <div class="card-body d-flex align-items-center">
+          <div class="rounded-circle bg-primary bg-opacity-10 p-3 me-3">
+            <i class="fas fa-user-check text-primary fa-2x"></i>
+          </div>
+          <div>
+            <h6 class="text-muted mb-1">Active Owners</h6>
+            <h2 class="mb-0 fw-bold">{{activeOwnersCount}}</h2>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Search Section -->
+  <div class="card mb-4">
+    <div class="card-header">
+      <h5>Search Owners</h5>
+    </div>
+    <div class="card-body">
+      <form (ngSubmit)="searchUsers()" class="row g-3">
+        <div class="col-md-8">
+          <label class="form-label">Search by name or surname</label>
+          <input type="text" class="form-control" [(ngModel)]="searchQuery" name="searchQuery" placeholder="Enter name or surname">
+        </div>
+        <div class="col-md-4 d-flex justify-content-end align-items-end">
+          <button type="submit" class="btn btn-danger">Search</button>
+          <button type="button" class="btn btn-light ms-2" (click)="searchQuery = ''; searchUsers()" title="Reset filters">
+            <i class="fas fa-undo"></i>
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Owners List -->
+  <div class="card">
+    <div class="card-header bg-white border-bottom py-3">
+      <div class="d-flex justify-content-between align-items-center">
+        <div class="d-flex align-items-center">
+          <i class="fas fa-users text-danger me-2"></i>
+          <h5 class="mb-0">Owners List</h5>
+        </div>
+        <div>
+          <span class="badge bg-danger">
+            {{users.length}} {{users.length === 1 ? 'owner' : 'owners'}}
+          </span>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="table-responsive">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Name</th>
+              <th>Surname</th>
+              <th>Email</th>
+              <th>Phone Number</th>
+              <th>Date of Birth</th>
+              <th>Created At</th>
+              <th>Status</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let user of users; let i = index">
+              <td>{{ i + 1 }}</td>
+              <td>
+                <div class="d-flex align-items-center">
+                  <div class="rounded-circle bg-light p-2 me-2">
+                    <i class="fas fa-user text-danger"></i>
+                  </div>
+                  <div>
+                    <div class="fw-semibold">{{ user.name }}</div>
+                    <small class="text-muted">ID: {{user.userId}}</small>
+                  </div>
+                </div>
+              </td>
+              <td>{{ user.surname }}</td>
+              <td>{{ user.email }}</td>
+              <td>{{ user.phoneNumber }}</td>
+              <td>{{ user.dateOfBirth | date: 'dd.MM.yyyy' }}</td>
+              <td>{{ user.createdAt | date: 'dd.MM.yyyy' }}</td>
+              <td>
+                <span [class]="user.isActive ? 'badge bg-success' : 'badge bg-danger'">
+                  {{ user.isActive ? 'Active' : 'Inactive' }}
+                </span>
+              </td>
+              <td>
+                <button class="btn btn-sm btn-success" (click)="viewUserDetail(user.userId)">
+                  <i class="fas fa-edit"></i> Edit
+                </button>
+              </td>
+            </tr>
+            <tr *ngIf="users.length === 0">
+              <td colspan="9">
+                <div class="text-center p-5 m-5">
+                  <i class="fas fa-users text-danger fa-3x mb-3"></i>
+                  <h5 class="text-danger mb-2">No Owners Found</h5>
+                  <p class="text-muted">
+                    Currently there are no owners matching the search criteria
+                  </p>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+  

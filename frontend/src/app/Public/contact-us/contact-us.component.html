@@ -1,0 +1,150 @@
+<div class="container py-5">
+  <!-- Header Section -->
+  <div class="row mb-5">
+    <div class="col-12 text-center">
+      <h1 class="display-4 text-danger mb-3">Contact Us</h1>
+      <p class="lead text-muted">
+        We're here to help and answer any questions you might have
+      </p>
+    </div>
+  </div>
+
+  <div class="row">
+    <!-- Contact Information -->
+    <div class="col-md-4 mb-4">
+      <div class="bg-light p-4 h-100 rounded shadow-sm">
+        <h3 class="text-danger mb-4">Get in Touch</h3>
+        
+        <div class="mb-4">
+          <h5 class="text-dark">Main Office</h5>
+          <p class="mb-0"><i class="bi bi-geo-alt-fill text-danger me-2"></i> Sarajevo, BiH</p>
+          <p class="mb-0"><i class="bi bi-telephone-fill text-danger me-2"></i> +387 33 000 000</p>
+          <p class="mb-0"><i class="bi bi-envelope-fill text-danger me-2"></i> info&#64;mojstol.ba</p>
+        </div>
+
+        <div class="mb-4">
+          <h5 class="text-dark">Business Hours</h5>
+          <p class="mb-0">Monday - Friday: 9:00 AM - 5:00 PM</p>
+          <p class="mb-0">Saturday: 10:00 AM - 2:00 PM</p>
+          <p class="mb-0">Sunday: Closed</p>
+        </div>
+
+        <div>
+          <h5 class="text-dark">Follow Us</h5>
+          <div class="fs-4">
+            <a href="#" class="text-danger me-3"><i class="bi bi-facebook"></i></a>
+            <a href="#" class="text-danger me-3"><i class="bi bi-instagram"></i></a>
+            <a href="#" class="text-danger me-3"><i class="bi bi-twitter"></i></a>
+            <a href="#" class="text-danger"><i class="bi bi-linkedin"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Contact Form -->
+    <div class="col-md-8">
+      <div class="bg-white p-4 rounded shadow-sm">
+        <h3 class="text-danger mb-4">Send Us a Message</h3>
+        
+        <form [formGroup]="contactForm" (ngSubmit)="onSubmit()">
+          <div class="row">
+            <div class="col-md-6 mb-3">
+              <label class="form-label">First Name*</label>
+              <input 
+                formControlName="firstName"
+                type="text" 
+                class="form-control"
+                [ngClass]="{ 'is-invalid': f['firstName'].touched && f['firstName'].errors }">
+            </div>
+
+            <div class="col-md-6 mb-3">
+              <label class="form-label">Last Name*</label>
+              <input 
+                formControlName="lastName"
+                type="text" 
+                class="form-control"
+                [ngClass]="{ 'is-invalid': f['lastName'].touched && f['lastName'].errors }">
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Email*</label>
+            <input 
+              formControlName="email"
+              type="email" 
+              class="form-control"
+              [ngClass]="{ 'is-invalid': f['email'].touched && f['email'].errors }">
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Subject*</label>
+            <input 
+              formControlName="subject"
+              type="text" 
+              class="form-control"
+              [ngClass]="{ 'is-invalid': f['subject'].touched && f['subject'].errors }">
+          </div>
+
+          <div class="mb-4">
+            <label class="form-label">Message*</label>
+            <textarea 
+              formControlName="message"
+              class="form-control"
+              [ngClass]="{ 'is-invalid': f['message'].touched && f['message'].errors }"
+              rows="5"></textarea>
+          </div>
+
+          <div class="d-grid">
+            <button 
+              type="submit" 
+              class="btn btn-danger btn-lg"
+              [disabled]="contactForm.invalid">
+              <i class="bi bi-send me-2"></i>Send Message
+            </button>
+          </div>
+
+          <!-- Keep only this validation messages section -->
+          <div *ngIf="contactForm.invalid" class="text-danger mt-2 small">
+            <div *ngIf="f['firstName'].errors?.['required'] && f['firstName'].touched">
+              * First name is required
+            </div>
+            <div *ngIf="f['lastName'].errors?.['required'] && f['lastName'].touched">
+              * Last name is required
+            </div>
+            <div *ngIf="f['email'].errors?.['required'] && f['email'].touched">
+              * Email is required
+            </div>
+            <div *ngIf="f['email'].errors?.['email'] && f['email'].touched">
+              * Please enter a valid email
+            </div>
+            <div *ngIf="f['subject'].errors?.['required'] && f['subject'].touched">
+              * Subject is required
+            </div>
+            <div *ngIf="f['message'].errors?.['required'] && f['message'].touched">
+              * Message is required
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Map Section -->
+  <div class="row mt-5">
+    <div class="col-12">
+      <div class="bg-light p-4 rounded shadow-sm">
+        <h3 class="text-danger mb-4">Our Location</h3>
+        <div class="ratio ratio-21x9">
+          <iframe 
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d92863.06259070438!2d18.35743505!3d43.8937875!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4758cbb1834c3379%3A0x8ad3ffeffd710bd!2sSarajevo!5e0!3m2!1sen!2sba!4v1663000000000!5m2!1sen!2sba" 
+            width="600" 
+            height="450" 
+            style="border:0;" 
+            allowfullscreen="" 
+            loading="lazy">
+          </iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

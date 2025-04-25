@@ -1,0 +1,247 @@
+<div class="container mt-4">
+  <!-- Stats Cards -->
+  <div class="row mb-4">
+    <div class="col-md-6">
+      <div class="card border-0 shadow-sm">
+        <div class="card-body d-flex align-items-center">
+          <div class="rounded-circle bg-danger bg-opacity-10 p-3 me-3">
+            <i class="bi bi-shop text-white fa-2x"></i>
+          </div>
+          <div>
+            <h6 class="text-muted mb-1">Total Restaurants</h6>
+            <h2 class="mb-0 fw-bold">{{ restaurants.length }}</h2>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="card border-0 shadow-sm">
+        <div class="card-body d-flex align-items-center">
+          <div class="rounded-circle bg-primary bg-opacity-10 p-3 me-3">
+            <i class="bi bi-geo-alt text-primary fa-2x"></i>
+          </div>
+          <div>
+            <h6 class="text-muted mb-1">Total Cities</h6>
+            <h2 class="mb-0 fw-bold">{{ cities.length }}</h2>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Filteri -->
+  <div class="card mb-4">
+    <div class="card-header">
+      <h5>Search by filters</h5>
+    </div>
+    <div class="card-body">
+      <form (ngSubmit)="fetchRestaurants()" class="row g-3">
+        <div class="col-md-3">
+          <label class="form-label">Restaurant Name</label>
+          <input
+            type="text"
+            class="form-control"
+            [(ngModel)]="searchName"
+            name="searchName"
+          />
+        </div>
+        <div class="col-md-3">
+          <label class="form-label">Restaurant Type</label>
+          <select
+            class="form-select"
+            [(ngModel)]="selectedTypeId"
+            name="selectedTypeId"
+          >
+            <option value="">All Restaurant Types</option>
+            <option *ngFor="let type of restaurantTypes" [value]="type.id">
+              {{ type.name }}
+            </option>
+          </select>
+        </div>
+        <div class="col-md-3">
+          <label class="form-label">City</label>
+          <select
+            class="form-select"
+            [(ngModel)]="selectedCityId"
+            name="selectedCityId"
+          >
+            <option value="">All Cities</option>
+            <option *ngFor="let city of cities" [value]="city.id">
+              {{ city.name }}
+            </option>
+          </select>
+        </div>
+        <div class="col-md-3">
+          <label class="form-label">Owner ID</label>
+          <input
+            type="text"
+            class="form-control"
+            [(ngModel)]="selectedOwnerId"
+            name="selectedOwnerId"
+          />
+        </div>
+        <div class="col-12">
+          <div class="d-flex align-items-center mb-2">
+            <i class="bi bi-tags text-danger me-2"></i>
+            <label class="form-label mb-0">Tags</label>
+          </div>
+          <div class="d-flex flex-wrap gap-2">
+            <button
+              *ngFor="let tag of tags"
+              type="button"
+              class="btn btn-sm"
+              [class.btn-danger]="selectedTagIds.includes(+tag.tagID)"
+              [class.btn-outline-danger]="!selectedTagIds.includes(+tag.tagID)"
+              (click)="toggleTagSelection(+tag.tagID)"
+            >
+              {{ tag.name }}
+            </button>
+          </div>
+        </div>
+        <div class="col-12">
+          <div class="d-flex align-items-center mb-2">
+            <i class="bi bi-credit-card text-danger me-2"></i>
+            <label class="form-label mb-0">Payment Methods</label>
+          </div>
+          <div class="d-flex flex-wrap gap-2">
+            <button
+              *ngFor="let method of paymentMethods"
+              type="button"
+              class="btn btn-sm"
+              [class.btn-danger]="
+                selectedPaymentMethodIds.includes(+method.paymentMethodID)
+              "
+              [class.btn-outline-danger]="
+                !selectedPaymentMethodIds.includes(+method.paymentMethodID)
+              "
+              (click)="togglePaymentMethodSelection(+method.paymentMethodID)"
+            >
+              {{ method.name }}
+            </button>
+          </div>
+        </div>
+        <div class="col-12">
+          <div class="d-flex align-items-center mb-2">
+            <i class="bi bi-gear text-danger me-2"></i>
+            <label class="form-label mb-0">Facilities</label>
+          </div>
+          <div class="d-flex flex-wrap gap-2">
+            <button
+              *ngFor="let facility of facilities"
+              type="button"
+              class="btn btn-sm"
+              [class.btn-danger]="
+                selectedFacilityIds.includes(+facility.facilitiesID)
+              "
+              [class.btn-outline-danger]="
+                !selectedFacilityIds.includes(+facility.facilitiesID)
+              "
+              (click)="toggleFacilitySelection(+facility.facilitiesID)"
+            >
+              {{ facility.name }}
+            </button>
+          </div>
+        </div>
+        <div class="col-12 d-flex justify-content-end gap-2">
+          <button type="button" class="btn btn-light" (click)="clearFilters()">
+            <i class="bi bi-x-circle me-2"></i>Clear Filters
+          </button>
+          <button type="submit" class="btn btn-danger">
+            <i class="bi bi-search me-2"></i>Search
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Lista restorana -->
+  <div class="card">
+    <div class="card-header bg-white border-bottom py-3">
+      <div class="d-flex justify-content-between align-items-center">
+        <div class="d-flex align-items-center">
+          <i class="bi bi-shop text-danger me-2"></i>
+          <h5 class="mb-0">Restaurants List</h5>
+        </div>
+        <div>
+          <span class="badge bg-danger">
+            {{ restaurants.length }}
+            {{ restaurants.length === 1 ? "restaurant" : "restaurants" }}
+          </span>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="table-responsive">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Address</th>
+              <th>Contact</th>
+              <th>Email</th>
+              <th>Website</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let restaurant of restaurants">
+              <td>
+                <div class="d-flex align-items-center">
+                  <div class="rounded-circle bg-light p-2 me-2">
+                    <i class="bi bi-shop text-danger"></i>
+                  </div>
+                  <div>
+                    <div class="fw-semibold">{{ restaurant.name }}</div>
+                    <small class="text-muted">ID: {{ restaurant.id }}</small>
+                  </div>
+                </div>
+              </td>
+              <td>{{ restaurant.street }}</td>
+              <td>{{ restaurant.contactNumber }}</td>
+              <td>{{ restaurant.contactEmail }}</td>
+              <td>
+                <a
+                  *ngIf="restaurant.webSite"
+                  [href]="addHttpProtocol(restaurant.webSite)"
+                  target="_blank"
+                  class="text-decoration-none"
+                >
+                  <i class="bi bi-link-45deg me-1"></i>Website
+                </a>
+                <span *ngIf="!restaurant.webSite">No website</span>
+              </td>
+              <td>
+                <div class="d-flex gap-2">
+                  <button
+                    class="btn btn-sm btn-outline-danger"
+                    routerLink="/edit/restaurants/{{ restaurant.id }}"
+                  >
+                    <i class="bi bi-pencil me-1"></i>Edit
+                  </button>
+                  <button
+                    class="btn btn-sm btn-outline-danger"
+                    (click)="deleteRestaurant(+restaurant.id)"
+                  >
+                    <i class="bi bi-trash me-1"></i>Delete
+                  </button>
+                </div>
+              </td>
+            </tr>
+            <tr *ngIf="restaurants.length === 0">
+              <td colspan="6">
+                <div class="text-center p-5 m-5">
+                  <i class="bi bi-shop text-muted fa-3x mb-3"></i>
+                  <h5 class="text-muted mb-2">No Restaurants Found</h5>
+                  <p class="text-muted">
+                    Currently there are no restaurants matching the given
+                    filters
+                  </p>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

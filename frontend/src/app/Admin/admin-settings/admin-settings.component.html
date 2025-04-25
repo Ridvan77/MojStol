@@ -1,0 +1,289 @@
+<div class="container bg-light my-5">
+    <div class="row">
+      <div class="col-12 col-lg-4 border p-4">
+        <h3>Admin list</h3>
+        <ul class="list-group my-3">
+            <li *ngFor="let user of users" class="list-group-item">
+              <div class="d-flex align-items-center justify-content-between">
+                <span>{{ user.name }} {{ user.surname }}</span>
+                <button class="btn btn-light btn-sm" 
+                        (click)="confirmDelete(user.userId, user.name + ' ' + user.surname)">
+                    <i class="bi bi-trash"></i>
+                </button>
+              </div>
+            </li>
+          </ul>
+
+          <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#addAdmin">
+            Add new Admin   
+          </button>
+      </div>
+  
+      <div class="col-12 col-lg-4 border p-4">
+        <h3>Tag list</h3>
+        <ul class="list-group my-3">
+          <li *ngFor="let tag of tags" class="list-group-item">
+              <div class="d-flex align-items-center justify-content-between">
+                  <span>{{ tag.name }}</span>
+                  <button class="btn btn-light btn-sm" 
+                          (click)="confirmDeleteTag(tag.tagID, tag.name)">
+                      <i class="bi bi-trash"></i>
+                  </button>
+              </div>
+          </li>
+      </ul>
+
+          <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#addTag">
+            Add new Tag
+          </button>
+      </div>
+  
+
+      <div class="col-12 col-lg-4 border p-4">
+        <h3>Payment Method</h3>
+        <ul class="list-group my-3">
+            
+            <li *ngFor="let paymentMethod of paymentMethods" class="list-group-item">
+              <div class="d-flex align-items-center justify-content-between">
+                <span>{{ paymentMethod.name }}</span>
+                <button class="btn btn-light btn-sm" 
+                        (click)="confirmDeletePaymentMethod(paymentMethod.paymentMethodID, paymentMethod.name)">
+                    <i class="bi bi-trash"></i>
+                </button>
+              </div>
+            </li>
+          </ul>
+
+          <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#addMethod">
+            Add new Payment Method
+          </button>
+      </div>
+      <div class="col-12 col-lg-4 border p-4">
+        <h3>Cities</h3>
+        <ul class="list-group my-3">
+            
+            <li *ngFor="let city of cities" class="list-group-item">
+              <div class="d-flex align-items-center justify-content-between">
+                <span>{{ city.name }}</span>
+                <button class="btn btn-light btn-sm" 
+                        (click)="confirmDeleteCity(city.id, city.name)">
+                    <i class="bi bi-trash"></i>
+                </button>
+              </div>
+            </li>
+          </ul>
+
+          <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#addCity">
+            Add new City
+          </button>
+      </div>
+      <div class="col-12 col-lg-4 border p-4">
+        <h3>Facilities list</h3>
+        <ul class="list-group my-3">
+          <li *ngFor="let facility of facilities" class="list-group-item">
+            <div class="d-flex align-items-center justify-content-between">
+              <span>{{ facility.name }}</span>
+              <button class="btn btn-light btn-sm" 
+                      (click)="confirmDeleteFacility(facility.facilitiesID, facility.name)">
+                <i class="bi bi-trash"></i>
+              </button>
+            </div>
+          </li>
+        </ul>
+
+        <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#addFacility">
+          Add new Facility
+        </button>
+      </div>
+      <div class="col-12 col-lg-4 border p-4">
+        <h3>Social Media list</h3>
+        <ul class="list-group my-3">
+          <li *ngFor="let socialMedia of socialMedias" class="list-group-item">
+            <div class="d-flex align-items-center justify-content-between">
+              <span>{{ socialMedia.name }}</span>
+              <button class="btn btn-light btn-sm" 
+                      (click)="confirmDeleteSocialMedia(socialMedia.socialMediaID, socialMedia.name)">
+                <i class="bi bi-trash"></i>
+              </button>
+            </div>
+          </li>
+        </ul>
+
+        <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#addSocialMedia">
+          Add new Social Media
+        </button>
+      </div>
+    </div>
+  </div>
+  
+
+  <!-- Modal za dodavanje admina -->
+  <div class="modal fade" id="addAdmin" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="staticBackdropLabel">Register new Admin</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="row">
+                <div class="col-6 mb-3">
+                  <label class="form-label">First name</label>
+                  <input formControlName="name" type="text" class="form-control">
+                </div>
+                <div class="col-6 mb-3">
+                  <label class="form-label">Last name</label>
+                  <input formControlName="surname" type="text" class="form-control">
+                </div>
+                <div class="col-12 mb-3">
+                  <label class="form-label">Email address</label>
+                  <input formControlName="email" type="email" class="form-control">
+                </div>
+                <div class="col-12 mb-3">
+                  <label class="form-label">Password</label>
+                  <input formControlName="password" type="password" class="form-control">
+                </div>
+
+                
+                <div class="col-12 mb-3">
+                  <button type="submit" class="btn btn-success w-100" [disabled]="registerForm.invalid">Register</button>
+                </div>
+            </form>
+        </div>
+      </div>
+    </div>
+  </div>
+    <!-- Modal za dodavanje tagova -->
+    <div class="modal fade" id="addTag" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="staticBackdropLabel">Add new Tag</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form [formGroup]="tagForm" (ngSubmit)="createTag()" class="row">
+                    <div class="col-12 mb-3">
+                        <label class="form-label" for="tagName">Tag Name</label>
+                        <input id="tagName" formControlName="tagName" type="text" class="form-control">
+                    </div>
+                    <div class="col-12 mb-3">
+                        <button type="submit" class="btn btn-success w-100" [disabled]="tagForm.invalid">Create Tag</button>
+                    </div>
+                  </form>
+            </div>
+          </div>
+        </div>
+    </div>
+    
+    <!-- Modal za dodavanje payment methods -->
+    <div class="modal fade" id="addMethod" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="staticBackdropLabel">Add new Payment Method</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form [formGroup]="paymentMethodForm" (ngSubmit)="createPaymentMethod()" class="row">
+                    <div class="col-12 mb-3">
+                        <label class="form-label" for="paymentMethodName">Payment Method Name</label>
+                        <input id="paymentMethodName" formControlName="name" type="text" class="form-control">
+                    </div>
+                    <div class="col-12 mb-3">
+                        <button type="submit" class="btn btn-success w-100" [disabled]="paymentMethodForm.invalid">Create Payment Method</button>
+                    </div>
+                </form>
+            </div>
+          </div>
+        </div>
+    </div>
+
+    <!-- Modal za dodavanje gradova -->
+    <div class="modal fade" id="addCity" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="staticBackdropLabel">Add new City</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+              <form [formGroup]="cityForm" (ngSubmit)="createCity()" class="row">
+                  <div class="col-12 mb-3">
+                      <label class="form-label" for="cityName">City Name</label>
+                      <input id="cityName" formControlName="name" type="text" class="form-control">
+                  </div>
+                  <div class="col-12 mb-3">
+                      <button type="submit" class="btn btn-success w-100" [disabled]="cityForm.invalid">Add City</button>
+                  </div>
+              </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Dodajte modal na kraj fajla -->
+    <div class="modal fade" id="addFacility" tabindex="-1" aria-labelledby="addFacilityLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="addFacilityLabel">Add New Facility</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <form [formGroup]="facilityForm" (ngSubmit)="createFacility()">
+              <div class="mb-3">
+                <label for="facilityName" class="form-label">Facility Name</label>
+                <input type="text" 
+                       class="form-control" 
+                       id="facilityName" 
+                       formControlName="name"
+                       placeholder="Enter facility name">
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="submit" 
+                        class="btn btn-danger" 
+                        [disabled]="!facilityForm.valid"
+                        data-bs-dismiss="modal">
+                  Add Facility
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Dodajte modal na kraj fajla -->
+    <div class="modal fade" id="addSocialMedia" tabindex="-1" aria-labelledby="addSocialMediaLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="addSocialMediaLabel">Add New Social Media</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <form [formGroup]="socialMediaForm" (ngSubmit)="createSocialMedia()">
+              <div class="mb-3">
+                <label for="socialMediaName" class="form-label">Social Media Name</label>
+                <input type="text" 
+                       class="form-control" 
+                       id="socialMediaName" 
+                       formControlName="name"
+                       placeholder="Enter social media name">
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="submit" 
+                        class="btn btn-danger" 
+                        [disabled]="!socialMediaForm.valid"
+                        data-bs-dismiss="modal">
+                  Add Social Media
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>

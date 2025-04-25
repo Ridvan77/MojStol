@@ -1,0 +1,16 @@
+<div *ngIf="socialMedias.length == 0">
+  {{ "This restaurants has no social medias." | translate }}
+</div>
+
+<div *ngIf="socialMedias.length != 0" class="fs-5">
+  <p *ngFor="let socialMedia of mySocialMedias">
+    <a href="{{ socialMedia.link }}">
+      <i
+        class="me-3 fs-5 align-middle"
+        *ngIf="socialMedia.socialMediaID === 1 || 2 || 3"
+        [ngClass]="icons[socialMedia.socialMedia.name]"
+      ></i>
+      {{ socialMedia.socialMedia.name }}
+    </a>
+  </p>
+</div>

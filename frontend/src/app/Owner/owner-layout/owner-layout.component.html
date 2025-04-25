@@ -1,0 +1,169 @@
+<div class="owner-layout">
+  <nav class="navbar navbar-expand-lg bg-light text-white border sticky-top">
+    <div class="container">
+      <a class="navbar-brand" routerLink="/"
+        ><img
+          src="../../../assets/images/LogoDark.svg"
+          alt="Logo"
+          class="img-fluid"
+      /></a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#navbarTogglerOwner"
+        aria-controls="navbarTogglerOwner"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarTogglerOwner">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a
+              class="nav-link"
+              routerLink="/owner/dashboard"
+              routerLinkActive="active"
+              >Dashboard</a
+            >
+          </li>
+          <li class="nav-item">
+            <a
+              class="nav-link"
+              routerLink="/owner/restaurants"
+              routerLinkActive="active"
+              >My Restaurants</a
+            >
+          </li>
+          <li class="nav-item">
+            <a
+              class="nav-link"
+              routerLink="/owner/reservations"
+              routerLinkActive="active"
+              >My Reservations</a
+            >
+          </li>
+          <li class="nav-item">
+            <a
+              class="nav-link"
+              routerLink="/owner/qr-scanner"
+              routerLinkActive="active"
+              >QR Scanner</a
+            >
+          </li>
+        </ul>
+
+
+        <form class="d-flex" role="search">
+                    <!-- Language Selector -->
+                    <li class="me-2 nav-item dropdown align-self-center">
+                      <button
+                        class="btn btn-outline-light dropdown-toggle"
+                        type="button"
+                        data-bs-toggle="dropdown"
+                        aria-expanded="false"
+                      >
+                        <img [src]="selectedLanguage.image" />
+                        <!-- {{ "language." + selectedLanguage.name | translate }} -->
+                      </button>
+                      <ul class="dropdown-menu">
+                        <li *ngFor="let language of languages">
+                          <button
+                            class="dropdown-item"
+                            (click)="selectLanguage(language.symbol)"
+                          >
+                            <img [src]="language.image" />
+                            {{ "language." + language.name | translate }}
+                          </button>
+                        </li>
+                      </ul>
+                    </li>
+          <div class="dropdown">
+            <button
+              class="btn btn-outline-danger dropdown-toggle"
+              type="button"
+              id="dropdownMenuButton"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            >
+              Hi, {{ userName }}
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+              <li>
+                <a class="dropdown-item" routerLink="/user-detail/{{ userId }}"
+                  >Profile</a
+                >
+              </li>
+              <li><hr class="dropdown-divider" /></li>
+              <li>
+                <a class="dropdown-item text-danger" (click)="logout()"
+                  >Logout</a
+                >
+              </li>
+            </ul>
+          </div>
+        </form>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container mt-4 content">
+    <router-outlet></router-outlet>
+  </div>
+
+  <div
+    class="container-fluid bg-dark py-5 text-white position-relative bottom-0 w-100"
+  >
+    <div class="container">
+      <div class="row py-5">
+        <div class="col-12 col-lg-4 text-center text-lg-start py-3">
+          <!-- logo -->
+          <a class="" href="#">MojStol</a>
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam
+            vestibulum mi dolor, vel auctor est tristique in. Sed non dictum
+            ipsum.
+          </p>
+        </div>
+        <div class="col-12 col-lg-2 d-flex flex-column text-center py-3">
+          <p class="fs-6 fw-bold text-danger">Quick access</p>
+          <a class="mb-2 text-decoration-none text-white" href="/">Home</a>
+          <a class="mb-2 text-decoration-none text-white" href="/restaurants"
+            >Restaurants</a
+          >
+          <a class="mb-2 text-decoration-none text-white" href="#cities"
+            >Cities</a
+          >
+        </div>
+        <div class="col-12 col-lg-2 d-flex flex-column text-center py-3">
+          <a class="mb-2 text-decoration-none text-white" href="/about-us"
+            >About us</a
+          >
+          <a class="mb-2 text-decoration-none text-white" href="/contact-us"
+            >Contact us</a
+          >
+          <a class="mb-2 text-decoration-none text-white" href="/privacy-policy"
+            >Privacy policy</a
+          >
+          <a class="mb-2 text-decoration-none text-white" href="/faq">FAQ</a>
+        </div>
+        <div class="col-12 col-lg-4 text-center py-3">
+          <p class="fs-5 text-white">
+            Do you want to be the first to receive news about new offers?
+          </p>
+          <p class="text-white">
+            Leave us your email and we will notify you on time!
+          </p>
+          <input
+            class="rounded p-2 border w-75 mx-auto"
+            type="email"
+            name=""
+            id=""
+            placeholder="email@example.com"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

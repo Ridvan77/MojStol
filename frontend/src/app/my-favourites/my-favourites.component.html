@@ -1,0 +1,38 @@
+<app-public-navbar></app-public-navbar>
+<div class="container text-center">
+  <h2>My favourite restaurants</h2>
+  <div class="row">
+    <div class="col-3" *ngFor="let restaurant of restaurantList">
+      <div class="restaurant-card">
+        <div class="restaurant-info h-100">
+          <div class="title">
+            <h5 (click)="redirect(restaurant.id)">{{ restaurant.name }}</h5>
+            <i
+              class="bi bi-bookmark-fill"
+              (click)="getFavouriteByUserAndRestaurant(restaurant.id)"
+            ></i>
+          </div>
+          <a
+            href="restaurants/{{ restaurant.id }}"
+            class="text-decoration-none"
+          >
+            <p class="text-decoration-none">
+              {{ restaurant.restaurantType?.name }}
+            </p>
+            <div class="stars">
+              <span *ngFor="let star of getFullStars(restaurant.averageRating)"
+                >★</span
+              >
+              <span *ngIf="hasHalfStar(restaurant.averageRating)">⯪</span>
+              <span *ngFor="let star of getEmptyStars(restaurant.averageRating)"
+                >☆</span
+              >
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-footer></app-footer>

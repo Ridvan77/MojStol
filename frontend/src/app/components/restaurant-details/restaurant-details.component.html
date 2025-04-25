@@ -1,0 +1,448 @@
+<!-- <app-public-navbar></app-public-navbar> -->
+<section class="container-fluid">
+  <div class="container py-5">
+    <div class="row gx-5">
+      <!-- Left side -->
+      <div class="col-8">
+        <div class="bg-body-secondary rounded-4 p-4">
+          <!-- Top section -->
+
+          <section class="d-flex align-items-center mb-4">
+            <!-- Image -->
+            <div>
+              <img
+                [src]="logoImageSrc"
+                class="me-5"
+                style="width: 100px; height: 100px; object-fit: contain"
+              />
+            </div>
+            <!-- Restaurant name -->
+            <div class="text-center display-6 fw-normal">
+              {{ restaurant?.name }}
+            </div>
+          </section>
+
+          <section class="d-flex justify-content-between align-items-center">
+            <div>
+              <app-stars-rating
+                [rating]="restaurant?.averageRating"
+              ></app-stars-rating>
+              <div class="lead">{{ restaurant?.restaurantType?.name }}</div>
+            </div>
+            <div class="d-flex flex-column">
+              <a
+                [routerLink]="['/reservations', restaurantId]"
+                class="btn btn-danger px-4 mb-1"
+                >{{ "restaurant.make_reservation_btn" | translate }}</a
+              >
+              <a
+                [routerLink]="['/reviews', restaurantId]"
+                class="btn btn-danger px-4"
+                >{{ "restaurant.leave_review_btn" | translate }}</a
+              >
+            </div>
+          </section>
+          <!-- Menu section -->
+          <section class="border-top mt-4">
+            <p class="display-6 fw-normal">
+              {{ "restaurant.menu.title" | translate }}
+            </p>
+            <div class="row gx-5">
+              <div class="col">
+                <div class="ratio overflow-hidden ratio-21x9 rounded-5">
+                  <div
+                    class="d-flex justify-content-center align-items-center"
+                    id="food"
+                  >
+                    <span
+                      class="text-white display-6 fw-semibold text-uppercase"
+                    >
+                      {{ "restaurant.menu.food.title" | translate }}
+                    </span>
+                  </div>
+                </div>
+
+                <div class="accordion mt-4" id="accordionExample1">
+                  <div
+                    *ngFor="
+                      let menuCategory of foodSet;
+                      let categoryIndex = index
+                    "
+                    class="accordion-item"
+                  >
+                    <div
+                      class="d-flex justify-content-between align-items-center"
+                    >
+                      <h2 class="accordion-header flex-grow-1">
+                        <button
+                          class="accordion-button collapsed"
+                          type="button"
+                          data-bs-toggle="collapse"
+                          aria-expanded="true"
+                          [attr.data-bs-target]="'#collapse' + menuCategory.id"
+                          [attr.aria-controls]="'collapse' + menuCategory.id"
+                        >
+                          {{ menuCategory.name }} #{{ menuCategory.id }}
+                        </button>
+                      </h2>
+                    </div>
+
+                    <div
+                      [id]="'collapse' + menuCategory.id"
+                      class="accordion-collapse collapse"
+                      data-bs-parent="#accordionExample1"
+                    >
+                      <div class="accordion-body">
+                        <div
+                          *ngFor="
+                            let menuItem of filteredMenuItems(menuCategory.id)
+                          "
+                          class="mb-1"
+                        >
+                          <div class="d-flex justify-content-between">
+                            <span>{{ menuItem.name }}</span>
+                            <div>
+                              <span class="d-inline-block">
+                                {{
+                                  menuItem.price
+                                    | currency : "BAM" : "" : "1.0-2"
+                                }}
+                                KM
+                              </span>
+                            </div>
+                          </div>
+                          <div
+                            *ngIf="menuItem.description"
+                            class="fst-italic text-danger-emphasis"
+                          >
+                            {{ menuItem.description }}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col">
+                <div class="ratio overflow-hidden ratio-21x9 rounded-5">
+                  <div
+                    id="drink"
+                    class="d-flex justify-content-center align-items-center"
+                  >
+                    <span
+                      class="text-white display-6 fw-semibold text-uppercase"
+                    >
+                      {{ "restaurant.menu.drink.title" | translate }}
+                    </span>
+                  </div>
+                </div>
+
+                <div class="accordion mt-4" id="accordionExample2">
+                  <div
+                    *ngFor="
+                      let menuCategory of drinkSet;
+                      let categoryIndex = index
+                    "
+                    class="accordion-item"
+                  >
+                    <div
+                      class="d-flex justify-content-between align-items-center"
+                    >
+                      <h2 class="accordion-header flex-grow-1">
+                        <button
+                          class="accordion-button collapsed"
+                          type="button"
+                          data-bs-toggle="collapse"
+                          aria-expanded="true"
+                          [attr.data-bs-target]="'#collapse' + menuCategory.id"
+                          [attr.aria-controls]="'collapse' + menuCategory.id"
+                        >
+                          {{ menuCategory.name }} #{{ menuCategory.id }}
+                        </button>
+                      </h2>
+                    </div>
+                    <div
+                      [id]="'collapse' + menuCategory.id"
+                      class="accordion-collapse collapse"
+                      data-bs-parent="#accordionExample2"
+                    >
+                      <div class="accordion-body">
+                        <div
+                          *ngFor="
+                            let menuItem of filteredMenuItems(menuCategory.id)
+                          "
+                          class="mb-1"
+                        >
+                          <div class="d-flex justify-content-between">
+                            <span>{{ menuItem.name }}</span>
+                            <div>
+                              <span class="d-inline-block"
+                                >{{
+                                  menuItem.price
+                                    | currency : "BAM" : "" : "1.0-2"
+                                }}
+                                KM
+                              </span>
+                            </div>
+                          </div>
+                          <div
+                            *ngIf="menuItem.description"
+                            class="fst-italic text-danger-emphasis"
+                          >
+                            {{ menuItem.description }}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+          <!-- Menu items -->
+        </div>
+
+        <!-- Photos block -->
+        <div class="bg-body-secondary rounded-4 p-4 mt-3">
+          <div class="mb-3">
+            <div class="fs-3">{{ "restaurant.images.title" | translate }}</div>
+          </div>
+
+          <app-carousel
+            [restaurantId]="restaurantId"
+            [imagesChanged]="true"
+          ></app-carousel>
+        </div>
+
+        <div class="mt-5 mb-5">
+          <div
+            *ngIf="reviews.length > 0"
+            class="bg-body-secondary rounded-4 h-100 p-4"
+          >
+            <p class="text-center display-6 fw-normal">Recenzije</p>
+            <div
+              *ngFor="let review of reviews"
+              class="row bg-body rounded-4 h-100 p-2 mb-2"
+            >
+              <div class="col-10">
+                <p style="margin-bottom: 1px">
+                  <strong
+                    >{{ review.user.name }} {{ review.user.surname }}</strong
+                  >
+                </p>
+                <p style="margin-bottom: -3px">
+                  <strong>Komentar:</strong> {{ review.comment }}
+                </p>
+                <div class="stars text-warning fs-5">
+                  <p class="text-black d-inline fs-6">
+                    <strong>Ocjena: </strong>
+                  </p>
+                  <span *ngFor="let star of getFullStars(review.rating)"
+                    >★</span
+                  >
+                  <span *ngIf="hasHalfStar(review.rating)">⯪</span>
+                  <span *ngFor="let star of getEmptyStars(review.rating)"
+                    >☆</span
+                  >
+                </div>
+                <p style="margin-bottom: 2px">
+                  <small
+                    >Objavljeno: {{ review.createdAt | date : "medium" }}</small
+                  >
+                </p>
+              </div>
+              <div class="col-2">
+                <div class="mt-3 mb-2">
+                  <button (click)="likeReview(review.reviewID, true)">
+                    👍
+                  </button>
+                  <span class="ps-2">{{
+                    fetchLikesDislikes(review.reviewID, true)
+                  }}</span>
+                </div>
+                <div>
+                  <button (click)="likeReview(review.reviewID, false)">
+                    👎
+                  </button>
+                  <span class="ps-2">{{
+                    fetchLikesDislikes(review.reviewID, false)
+                  }}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Right side -->
+      <div class="col-4">
+        <!-- First block -->
+        <div class="bg-body-secondary rounded-4 p-4">
+          <p class="display-6 text-center">
+            {{ "restaurant.about_us" | translate }}
+          </p>
+          <hr class="text-danger" />
+          <p class="lead fs-6">{{ restaurant?.description }}</p>
+        </div>
+
+        <!-- Second block -->
+        <div class="bg-body-secondary rounded-4 p-2 mt-3">
+          <div class="mt-2 mb-3 mx-3">
+            <span class="fs-3 text-center">{{
+              "restaurant.map.title" | translate
+            }}</span>
+          </div>
+
+          <app-map-view [location]="restaurantLocation"></app-map-view>
+        </div>
+
+        <!-- Third block -->
+        <div class="bg-body-secondary rounded-4 p-4 mt-3">
+          <p>
+            <i class="bi bi-geo-alt me-3 fs-4 align-middle"></i>
+            <span class="fw-medium align-middle"
+              >{{ restaurant?.city?.name }}, {{ restaurant?.street }}</span
+            >
+          </p>
+          <p>
+            <i class="bi bi-telephone me-3 fs-4 align-middle"></i>
+            <a
+              [href]="'tel:' + restaurant?.contactNumber"
+              class="fw-medium align-middle text-decoration-none"
+              >{{ restaurant?.contactNumber }}</a
+            >
+          </p>
+          <p>
+            <i class="bi bi-envelope me-3 fs-4 align-middle"></i>
+            <a
+              [href]="'email:' + restaurant?.contactEmail"
+              class="fw-medium align-middle text-decoration-none"
+              >{{ restaurant?.contactEmail }}</a
+            >
+          </p>
+          <p>
+            <i class="bi bi-globe2 me-3 fs-4 align-middle"></i>
+            <a
+              *ngIf="restaurant?.webSite"
+              [href]="addHttpProtocol(restaurant?.webSite)"
+              target="_blank"
+              class="fw-medium align-middle text-decoration-none"
+              >{{
+                restaurant?.webSite || ("restaurant.no_website" | translate)
+              }}</a
+            >
+            <span *ngIf="!restaurant?.webSite" class="fw-medium align-middle">{{
+              "restaurant.no_website" | translate
+            }}</span>
+          </p>
+
+          <div class="d-flex justify-content-between align-items-start">
+            <p>
+              <i class="bi bi-clock me-3 fs-4 align-middle"></i>
+              <span class="fw-medium align-middle">{{
+                "restaurant.working_hours.title" | translate
+              }}</span>
+            </p>
+          </div>
+
+          <app-working-hours-view
+            [workingDays]="workingDays"
+          ></app-working-hours-view>
+        </div>
+
+        <!-- Fourth block -->
+        <div class="bg-body-secondary rounded-4 p-4 mt-3">
+          <div class="d-flex justify-content-between align-items-center mb-3">
+            <span class="fs-3 text-center">{{
+              "restaurant.tags.title" | translate
+            }}</span>
+          </div>
+
+          <app-tags-view [tags]="tags"></app-tags-view>
+        </div>
+
+        <!-- Fifth block -->
+        <div class="bg-body-secondary rounded-4 p-4 mt-3">
+          <div class="d-flex justify-content-between align-items-center mb-3">
+            <span class="fs-3 text-center">{{
+              "restaurant.payment_methods.title" | translate
+            }}</span>
+          </div>
+
+          <app-payment-methods-view
+            [paymentMethods]="paymentMethods"
+          ></app-payment-methods-view>
+        </div>
+
+        <!-- Sixth block -->
+        <div class="bg-body-secondary rounded-4 p-4 mt-3">
+          <div class="d-flex justify-content-between align-items-center mb-3">
+            <span class="fs-3 text-center">Facilities</span>
+          </div>
+
+          <p *ngFor="let facility of restaurantFacilities">
+            <i
+              *ngIf="facility.facilitiesID === 1"
+              class="bi bi-wifi me-3 fs-3 align-middle"
+            ></i>
+            <i
+              *ngIf="facility.facilitiesID === 2"
+              class="bi bi-p-circle me-3 fs-3 align-middle"
+            ></i>
+            <i
+              *ngIf="facility.facilitiesID === 3"
+              class="bi bi-sun me-3 fs-3 align-middle"
+            ></i>
+            <svg
+              *ngIf="facility.facilitiesID === 4"
+              class="me-3 fs-3 align-middle"
+              xmlns="http://www.w3.org/2000/svg"
+              height="24px"
+              viewBox="0 -960 960 960"
+              width="24px"
+              fill="#000000"
+            >
+              <path
+                d="M126.15-233.85v-70.77h556.93v70.77H126.15Zm596.93 0v-70.77h35.38v70.77h-35.38Zm75.38 0v-70.77h35.39v70.77h-35.39ZM723.08-360v-52q0-35.92-23-58.73-23-22.81-55-22.81h-62q-45.23 0-77.31-32.73Q473.69-559 473.69-606q0-44.43 32.08-75.37 32.08-30.94 77.31-30.94v35.39q-30 0-52 20.08-22 20.09-22 50.69 0 30.61 22 53.92 22 23.31 52 23.31h62q46.77 0 80.07 33.3 33.31 33.31 33.31 80.39V-360h-35.38Zm75.38 0v-90q0-66-46-107.85-46-41.84-114-41.84v-35.39q30 0 51.23-21.23 21.23-21.23 21.23-51.23 0-31.54-21.23-53.54t-51.23-22v-35.38q45.23 0 76.54 32.84 31.31 32.85 31.31 78.08 0 29-11.77 49.81-11.77 20.81-29.77 33.78 52.15 16.87 90.61 61.64 38.47 44.77 38.47 112.31v90h-35.39Z"
+              />
+            </svg>
+            <svg
+              *ngIf="facility.facilitiesID === 5"
+              class="me-3 fs-3 align-middle"
+              xmlns="http://www.w3.org/2000/svg"
+              height="24px"
+              viewBox="0 -960 960 960"
+              width="24px"
+              fill="#000000"
+            >
+              <path
+                d="M280-140v-40h180v-258.46L173.85-760v-40h612.3v40L500-438.46V-180h180v40H280Zm18-540h364l72-80H226l72 80Zm182 204 146.38-164H333.62L480-476Zm0 0Z"
+              />
+            </svg>
+            <svg
+              *ngIf="facility.facilitiesID === 6"
+              class="me-3 fs-3 align-middle"
+              xmlns="http://www.w3.org/2000/svg"
+              height="24px"
+              viewBox="0 -960 960 960"
+              width="24px"
+              fill="#000000"
+            >
+              <path
+                d="m143.85-146.15 150.77-421.54 270.77 270.77-421.54 150.77ZM209.69-212l282-100-182-182-100 282Zm326.93-233.69-25.08-25.08 214.77-214.77q28.15-28.15 68.54-28.15 40.38 0 68.53 28.15l14.77 14.77-23.53 25.08-14.77-14.77q-18.62-18.62-44.23-18.62-25.62 0-44.24 18.62L536.62-445.69ZM404.31-578l-25.08-25.08 24-24q21.69-21.69 21.69-52.46T403.23-732l-24.46-24.46 25.08-25.08 24.46 24.46q32 32 32 77.54 0 45.54-32 77.54l-24 24Zm66.15 66.15-25.08-25.07 134.77-134.77q18.62-18.62 18.62-44.23 0-25.62-18.62-44.23l-54.77-54.77L550.46-840l54.77 54.77q28.92 28.92 28.92 69.31 0 40.38-28.92 69.3L470.46-511.85Zm132.31 132.31-25.08-25.08 31.7-31.69q32.76-32.77 79.3-32.77T768-436.31l31.69 31.69-25.07 25.08-31.7-31.69q-22.46-22.46-54.23-22.46-31.77 0-54.23 22.46l-31.69 31.69ZM209.69-212Z"
+              />
+            </svg>
+            <span>{{ facility.facilities.name }}</span>
+          </p>
+        </div>
+
+        <!-- Seventh block -->
+        <div class="bg-body-secondary rounded-4 p-4 mt-3">
+          <div class="d-flex justify-content-between align-items-center mb-3">
+            <span class="fs-3 text-center">Social media</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- <app-footer></app-footer> -->

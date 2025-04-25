@@ -1,0 +1,180 @@
+<div class="container py-5">
+  <div *ngIf="reservation" class="row justify-content-center">
+    <div class="col-12 col-lg-9">
+      <div class="card shadow-sm">
+        <div class="card-body p-4">
+          <div class="text-center mb-4">
+            <div class="avatar-placeholder mb-3">
+              <i class="bi bi-calendar-event display-1 text-danger"></i>
+            </div>
+            <h2 class="card-title">Reservation Details</h2>
+            <p class="text-muted">Update your personal information</p>
+          </div>
+          <form
+            (ngSubmit)="updateReservation()"
+            #reservationForm="ngForm"
+            class="needs-validation"
+          >
+            <!-- Reservation Information Section -->
+            <div class="mb-4">
+              <h5 class="border-bottom pb-2 text-dark">
+                Reservation Information
+              </h5>
+              <div class="row g-3">
+                <!-- Reservation date -->
+                <div class="col-md-5">
+                  <div class="form-floating mb-3">
+                    <input
+                      type="date"
+                      class="form-control"
+                      id="reservationDate"
+                      [(ngModel)]="reservation.reservationDate"
+                      name="reservationDate"
+                      placeholder="Reservation date"
+                      [disabled]="reservation.statusID === 3"
+                    />
+                    <label for="Reservation date">Reservation date</label>
+                  </div>
+                </div>
+
+                <!-- Reservation time -->
+                <div class="col-md-5">
+                  <div class="form-floating mb-3">
+                    <input
+                      type="time"
+                      class="form-control"
+                      id="reservationTime"
+                      [(ngModel)]="reservation.reservationTime"
+                      name="reservationTime"
+                      placeholder="Reservation time"
+                      [disabled]="reservation.statusID === 3"
+                    />
+                    <label for="Reservation time">Reservation time</label>
+                  </div>
+                </div>
+
+                <!-- Number of persons -->
+                <div class="col-md-2">
+                  <div class="form-floating mb-3">
+                    <input
+                      type="number"
+                      class="form-control"
+                      id="numberOfPersons"
+                      [(ngModel)]="reservation.numberOfPersons"
+                      name="numberOfPersons"
+                      placeholder="Number of persons"
+                      [disabled]="reservation.statusID === 3"
+                      min="1"
+                      max="8"
+                    />
+                    <label for="Number of persons">Number of persons</label>
+                  </div>
+                </div>
+              </div>
+              <div class="row g-3" [hidden]="userRole === 'User'">
+                <div class="col-12">
+                  <select
+                    class="form-select"
+                    [(ngModel)]="reservation.statusID"
+                    [ngModelOptions]="{ standalone: true }"
+                  >
+                    <option value="1">Pending</option>
+                    <option value="2">Confirmed</option>
+                    <option value="3">Cancelled</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <!-- Personal Information Section -->
+            <div class="mb-4">
+              <h5 class="border-bottom pb-2 text-dark">Personal Information</h5>
+              <div class="row g-3">
+                <!-- Name -->
+                <div class="col-md-6">
+                  <div class="form-floating mb-3">
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="name"
+                      [(ngModel)]="reservation.name"
+                      name="name"
+                      required
+                      placeholder="Enter your name"
+                      [disabled]="reservation.statusID === 3"
+                    />
+                    <label for="name">Name</label>
+                  </div>
+                </div>
+
+                <!-- Email -->
+                <div class="col-md-6">
+                  <div class="form-floating mb-3">
+                    <input
+                      type="tel"
+                      class="form-control"
+                      id="email"
+                      [(ngModel)]="reservation.email"
+                      name="email"
+                      placeholder="Enter your email"
+                      [disabled]="reservation.statusID === 3"
+                    />
+                    <label for="email">Email</label>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- System Information Section -->
+            <div class="mb-4">
+              <h5 class="border-bottom pb-2 text-dark">System Information</h5>
+              <div class="row g-3">
+                <!-- Created At -->
+                <div class="col-md-12">
+                  <div class="form-floating mb-3">
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="createdAt"
+                      [value]="reservation.createdAt | date : 'medium'"
+                      disabled
+                      placeholder="Created At"
+                      [disabled]="reservation.statusID === 3"
+                    />
+                    <label for="createdAt">Created At</label>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-4">
+              <button
+                type="button"
+                class="btn btn-outline-secondary me-2"
+                (click)="cancelReservation()"
+                [disabled]="reservation.statusID === 3"
+              >
+                Cancel reservation
+              </button>
+              <button
+                type="button"
+                class="btn btn-outline-secondary me-md-2"
+                (click)="cancel()"
+              >
+                <i class="bi bi-x-circle me-2"></i>Cancel
+              </button>
+              <button
+                type="submit"
+                class="btn btn-danger"
+                [disabled]="!reservationForm.form.valid"
+              >
+                <i class="bi bi-check-circle me-2"></i>Save Changes
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
