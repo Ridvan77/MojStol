@@ -39,18 +39,6 @@ ng serve
 ```
 3. Open application at `http://localhost:4200`
 
-
-
-Admin Role Login:
-    adil+1@edu.fit.ba
-    AdminPass
-Owner Role Login:
-    adil+2@edu.fit.ba
-    UserPass
-User Role Login:
-    adil+3@edu.fit.ba
-    OwnerPass
-
 ## Prerequisites
 - .NET Core SDK
 - Node.js and npm
